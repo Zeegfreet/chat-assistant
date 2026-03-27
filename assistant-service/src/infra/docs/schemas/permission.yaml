@@ -1,0 +1,36 @@
+type: object
+
+required:
+  - resource
+  - method
+
+properties:
+  id: 
+    type: number
+    example: 1
+    description: Identificador único da entidade Permission.
+
+  resource:
+    type: string
+    example: ROLE
+    minLength: 3
+    maxLength: 25
+    description: Nome do recurso a qual esta permissão permite a utilização.
+
+  method:
+    type: string
+    enum: [ "CREATE", "READ", "UPDATE", "DELETE" ]
+    example: CREATE
+    description: Método do recurso a qual esta permissão permite a utilização.
+
+  createdAt: 
+    type: string
+    format: date-time
+    example: "2026-01-01T12:36:00.000Z"
+    description: Data da criação da permissão.
+
+  updatedAt:
+    type: string
+    format: date-time
+    example: "2026-01-01T12:36:00.000Z"
+    description: Data da última atualização da permissão.

@@ -1,0 +1,62 @@
+components:
+  parameters:
+
+    Page:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+      description: Número da página atual na pesquisa.
+
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        example: 100
+      description: Número de itens por página.
+
+    Search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Trecho de texto a se pesquisar na entidade
+
+    Order:
+      name: order
+      in: query
+      required: false
+      style: deepObject
+      explode: true
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+          enum: [ASC, DESC]
+      description: >
+        Ordena os dados listados, podendo ser ASC para Ascendente e DESC para descendente.
+    
+    Filter:
+      name: filter
+      in: query
+      required: false
+      style: deepObject
+      explode: true
+      schema:
+        type: object
+      description: >
+        Filtra estritamente os campos do modelo de dados, podendo se utilizar dos operadores especiais:<br>
+        $gt: Maior que, Ex: id: { $gt: 2 },<br>
+        $gte: Maior que ou igual a, Ex: id: { $gte: 2 },<br>
+        $lt: Menor que, Ex: id: { $lt: 2 },<br>
+        $lte: Menor que ou igual a, Ex: id: { $lte: 2 },<br>
+        $between: Entre, Ex: id: { $between: [2, 6] }<br>
+        $in: Contendo, Ex: id: { $in: [2,3,5,9] }

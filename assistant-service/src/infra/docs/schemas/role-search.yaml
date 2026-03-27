@@ -1,0 +1,36 @@
+type: object
+
+required:
+  - role
+  - description
+
+
+properties:
+  id: 
+    type: number
+    example: 2
+    description: Identificador único da entidade Role
+  role: 
+    type: string
+    example: Faturista
+    description: Nome da função do usuário
+  description: 
+    type: string
+    example: Operador responsável pela emissão de notas fiscais e emissão dos CTES.
+    description: Descrição da função do usuário.
+  isActive: 
+    type: boolean
+    example: true
+    description: Indica se a função está ativa para uso.
+  isDefault: 
+    type: boolean
+    example: false
+    description: Indica se a função é padrão, funções padrões serão automáticamente vinculadas a novos usuários cadastrados pela rota de signup.
+  createdAt:
+    type: string
+    format: date-time
+    example: "2026-01-01T00:00:00.000Z"
+  updatedAt:
+    type: string
+    format: date-time
+    example: "2026-01-01T00:00:00.000Z"

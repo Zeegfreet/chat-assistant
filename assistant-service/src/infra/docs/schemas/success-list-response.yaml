@@ -1,0 +1,29 @@
+type: object
+required:
+  - success
+  - resources
+
+properties:
+  success:
+    type: boolean
+    example: true
+
+  resources:
+    type: object
+    required:
+      - data
+      - totalPages
+      - currentPage
+    properties:
+      data:
+        type: array
+        items:
+          type: object
+
+      totalPages:
+        type: number
+        example: 100
+      
+      currentPage:
+        type: number
+        example: 2

@@ -1,0 +1,28 @@
+type: object
+
+required:
+  - role
+  - description
+
+properties:
+  role: 
+    type: string
+    example: Faturista
+  description: 
+    type: string
+    example: Operador responsável pela emissão de notas fiscais e emissão dos CTES.
+  permissions:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Chave primária da permissão
+  isActive: 
+    type: boolean
+    example: true
+  isDefault: 
+    type: boolean
+    example: false

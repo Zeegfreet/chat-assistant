@@ -1,0 +1,56 @@
+post:
+  tags:
+    - Auth
+  security: []
+  summary: SignUp
+  description: Rota pública para cadastro de novos usuários, deve registrar novo usuário no sistema e retornar dados do cadastro realizado ao fim da requisição.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/signup.yaml"
+  responses:
+    "201":
+      description: Cadastro realizado com sucesso
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    $ref: "../schemas/user.yaml"
+    "400":
+      description: Requisição incorreta
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Falha na validação de dados
+              value:
+                success: false
+                error: VALIDATION_ERROR
+                message: "email: Invalid email address"
+    "409":
+      "description": Email já existe
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            emailAlreadyInUse:
+              summary: Email já está em uso.
+              value:
+                success: true
+                error: EMAIL_ALREADY_EXISTS_ERROR
+                message: The received email already exists
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"

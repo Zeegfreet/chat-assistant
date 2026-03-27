@@ -1,0 +1,138 @@
+post:
+  tags:
+    - Role
+  summary: Adicionar Role
+  description: |
+    Permite a criação de uma nova função (Role) no banco de dados.<br>
+    Através das roles os usuários recebem permissões para acessar recursos autorizados por Funções.
+    ### Permissões
+    Para vincular uma permissão a Role, basta enviar um array com os ids das permissões a se vincular.
+
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/role-create.yaml"
+
+  responses:
+    "201":
+      description: Role criada com sucesso
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    $ref: "../schemas/role.yaml"
+    "400":
+      description: Requisição ruim
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Erro na validação de dados
+              value:
+                success: false
+                error: VALIDATION_ERROR
+                example: "role: role is not string"
+    "401":
+      $ref: "../schemas/error-unauthorized.yaml"
+    "404":
+      description: Não encontrado
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            notFounderror:
+              summary: Permissão não localizada.
+              value:
+                success: false
+                error: NOT_FOUND_ERROR
+                example: "Permission not found with received id"
+
+    "409":
+      "description": Permissão já existe
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            roleAlreadyExists:
+              summary: Role já cadastrada.
+              value:
+                success: false
+                error: ALREADY_EXISTS_ERROR
+                message: Already exists a role with received data.            
+    "500":
+      description: Erro desconhecido
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+
+
+get:
+  tags: 
+    - Role
+  summary: Pesquisa Role
+  description: >
+    Permite pesquisar Roles, ou listar sem qualquer filtro.
+  parameters:
+    - $ref: "../schemas/search.yaml#/components/parameters/Page"
+    - $ref: "../schemas/search.yaml#/components/parameters/Limit"
+    - $ref: "../schemas/search.yaml#/components/parameters/Search"
+    - $ref: "../schemas/search.yaml#/components/parameters/Order"
+      example:
+          id: DESC
+    - $ref: "../schemas/search.yaml#/components/parameters/Filter"
+      example:
+        id: 1
+        createdAt:
+          "$gte": '2026-01-01T00:00:00.000Z'
+      
+  responses:
+    "200":
+      description: Successo ao pesquisar
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-list-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "../schemas/role-search.yaml"
+                              
+    "400":
+      description: Falha na requisição
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Dados inválidos
+              value:
+                success: false
+                error: "VALIDATION_ERROR"
+                message: "order.id: Invalid option: expected one of \"ASC\"|\"DESC\""
+    "401":
+      $ref: "../schemas/error-unauthorized.yaml"
+      
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"

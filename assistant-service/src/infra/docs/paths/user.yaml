@@ -1,0 +1,79 @@
+post:
+  tags:
+    - User
+  summary: Cadastra usuário
+  description: Realiza o cadastro de novo usuário
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/signup.yaml"
+  responses:
+    "201":
+      description: Cadastro realizado com sucesso
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    $ref: "../schemas/user.yaml"
+    "400":
+      description: Falha ao realizar cadastro
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Validation Error
+              value:
+                success: false
+                error: VALIDATION_ERROR
+                message: "email: email is inválid"
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal Server Error"
+get:
+  tags:
+    - User
+  summary: Lista usuários.
+  description: Lista todos os usuários cadastrados.
+  responses:
+    "200":
+      description: Usuários listados com uscesso
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    type: array
+                    items:
+                      $ref: "../schemas/user.yaml"
+    "500":
+      description: Unknown
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal Server Error"

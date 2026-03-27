@@ -1,0 +1,12 @@
+"description": Não autorizado.
+content:
+  application/json:
+    schema:
+      $ref: "../schemas/error-base-response.yaml"
+    examples:
+      unauthorized:
+        summary: Usuário não possui autorização para acessar este recurso
+        value:
+          success: false
+          error: ACCESS_DENIED_ERROR
+          message: "Access denied"

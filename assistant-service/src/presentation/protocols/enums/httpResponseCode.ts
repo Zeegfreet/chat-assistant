@@ -1,0 +1,9 @@
+export enum HttpResponseCode {
+    SUCCESS = 200,
+    SUCCESS_CREATED = 201,
+    SUCCESS_NO_CONTENT = 204,
+    ERROR_BAD_REQUEST = 400,
+    ERROR_UNAUTHORIZED = 401,
+    ERROR_NOT_FOUND = 404,
+    ERROR_UNKNOWN = 500
+}

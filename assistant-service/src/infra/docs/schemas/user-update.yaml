@@ -1,0 +1,18 @@
+type: object
+
+properties:
+
+  name:
+    type: string
+    example: John Doe
+
+  email:
+    type: string
+    example: john@doe.com
+
+  avatar:
+    type: string
+    nullable: true
+
+  isActive:
+    type: boolean

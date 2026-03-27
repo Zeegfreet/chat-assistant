@@ -1,0 +1,176 @@
+get:
+  tags:
+    - User
+  summary: Busca usuário
+  description: Busca usuário pelo Id fornecido.
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID do usuário
+      schema:
+        type: integer
+        format: int64
+        example: 1
+  responses:
+    "200":
+      description: Usuário encontrado
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/user.yaml"
+    "404":
+      description: Usuário não encontrado
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Not found: User not found."
+    "400":
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Bad request error"
+    "500":
+      description: Erro desconhecido
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal Server Error"
+
+delete:
+  tags:
+    - User
+  summary: Deleta usuário
+  description: Deleta usuário utilizando ID como chave de busca. (SoftDelete)
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID do usuário
+      schema:
+        type: integer
+        format: int64
+        example: 1
+  responses:
+    "204":
+      description: Usuário deletado
+    "404":
+      description: Usuário não encontrado
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Not found: User not found."
+    "400":
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Bad request error"
+    "500":
+      description: Erro desconhecido
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal Server Error"
+
+
+patch:
+  tags:
+    - User
+  summary: Atualiza usuário
+  description: Busca usuário pelo id e o atualiza com os dados fornecidos.
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: ID do usuário
+      schema:
+        type: integer
+        format: int64
+        example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/user-update.yaml"
+  responses:
+    "200":
+      description: Usuário encontrado
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/user.yaml"
+    "404":
+      description: Usuário não encontrado
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Not found: User not found."
+    "400":
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Bad request error"
+    "500":
+      description: Erro desconhecido
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/error-base-response.yaml"
+              - type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal Server Error"

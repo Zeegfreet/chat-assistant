@@ -1,0 +1,57 @@
+type: object
+
+required:
+  - role
+  - description
+
+description: >
+  Entidade utilizada para definição das funções de cada usuário e suas devidas permissões.
+
+properties:
+  id: 
+    type: number
+    example: 2
+    description: Identificador único da entidade Role
+  role: 
+    type: string
+    example: Faturista
+    description: Nome da função do usuário
+  description: 
+    type: string
+    example: Operador responsável pela emissão de notas fiscais e emissão dos CTES.
+    description: Descrição da função do usuário.
+  isActive: 
+    type: boolean
+    example: true
+    description: Indica se a função está ativa para uso.
+  isDefault: 
+    type: boolean
+    example: false
+    description: Indica se a função é padrão, funções padrões serão automáticamente vinculadas a novos usuários cadastrados pela rota de signup.
+  permissions:
+    type: array
+    description: Define as permissões que a função proverá aos usuários vinculados.
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Chave primária da permissão
+        resource:
+          type: string
+          example: ROLE
+          description: Nome do recurso gerenciado pela permissão.
+        method:
+          type: string
+          enum: [CREATE, READ, UPDATE, DELETE]
+          example: CREATE
+          description: Nome do método permitido.
+  createdAt:
+    type: string
+    format: date-time
+    example: "2026-01-01T00:00:00.000Z"
+  updatedAt:
+    type: string
+    format: date-time
+    example: "2026-01-01T00:00:00.000Z"

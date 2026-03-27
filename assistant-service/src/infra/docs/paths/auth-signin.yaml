@@ -1,0 +1,85 @@
+post:
+  tags:
+    - Auth
+  security: []
+  summary: SignIn
+  description: Rota pública para autenticação de usuário.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/signin.yaml"
+  responses:
+    "200":
+      description: "Usuário autenticado"
+      headers:
+        Set-Cookie:
+          description: >
+            Autenticado com sucesso.
+            O id desta sessão será salvo em um Cookie com o nome 'Authorization'.
+            Vcê precisa incluir este cookie nas requisições subsequentes.
+          schema:
+            type: string
+            example: Bearer xok1TFSYku39gBh-eovpbhEyKbsWCxeXdY89aVeN5d_gYOeKwAQu-StJwYI6dL3Fp68obzmJffED3EGEXl_ZrueYGiiJa2d1BIPNoTfnNAco1p8nAgJLk-WEGZ7Geb_nZu4nhdAZAv5FNgU52EEqKxQEu0jozJVFqgS87KfwVlD-xGge4DpscXuBaXfRKn-gqDkIFgVDhkwLIcKvE64hNXFi0ubVSKKQJ24NGRAqrqvQW6y4Fo14NZceI8o8SvfoPNPHUAQ8iF2OiXJ_8wglcwK1k0Kr2ODxRHYLNPt9NOZ37nMYibZ6TDmk6is3GL9TNJ_7fsoh4QNS-WSelzgCS3ivt07R1N5_P5eG-KKbkzYB6gBE-fk7Os6JikT1G5co0yBRDJoVKTl0Fvysq73xdNIi3bgWOCkniCTcZ2WGqfVDuXRLrFyqgwIIVFEShRBpw2RXD-yGVssFsuya; Path=/; httpOnly
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    $ref: "../schemas/signin-response.yaml"
+    "400":
+      description: Requisição incorreta
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Falha na validação de dados
+              value:
+                success: false
+                error_code: VALIDATION_ERROR
+                message: "email: Invalid email address"
+    "401":
+      description: Credenciais inválidas
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            unauthorized:
+              summary: Não autorizado
+              value:
+                success: false
+                error_code: INVALID_CREDENTIALS_ERROR
+                message: The received credentials are inválid
+    "403":
+      description: Acesso Proibido
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            blocked:
+              summary: Usuário bloqueado
+              value:
+                success: false
+                error_code: FORBIDDEN_ERROR
+                message: Current user is blocked
+            inactive:
+              summary: Usuário inativo
+              value:
+                success: false
+                error_code: FORBIDDEN_ERROR
+                message: Current user is inactive
+
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"

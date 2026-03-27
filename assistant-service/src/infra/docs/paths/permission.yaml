@@ -1,0 +1,177 @@
+post:
+  tags:
+    - Permission
+  summary: Adiciona nova permissão
+  description: >
+    Rota privada utilizada para o cadastro de novas permissões.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/permission-create.yaml"
+
+  responses:
+    "201":
+      description: "Permissão cadastrada com sucesso"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    $ref: "../schemas/permission.yaml"
+    "400":
+      "description": Requisição errada.
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validatoinError:
+              summary: Dados inválidos na requisição
+              value:
+                success: false
+                error: VALIDATION_ERROR
+                message: "resource: Too small: expected string to have >=3 characters"
+    "401":
+      $ref: "../schemas/error-unauthorized.yaml"
+
+    "409":
+      "description": Permissão já existe
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            permissionAlreadyInUse:
+              summary: Permissão já cadastrada anteriormente.
+              value:
+                success: false
+                error: ALREADY_EXISTS_ERROR
+                message: Already exists a permission with the receved resource and method.
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+
+get:
+  tags: 
+    - Permission
+  summary: Pesquisa permissões
+  description: >
+    Lista permissões podendo se utilizar de critérios espciais de busca, paginação e ordenação.
+  parameters:
+    - $ref: "../schemas/search.yaml#/components/parameters/Page"
+    - $ref: "../schemas/search.yaml#/components/parameters/Limit"
+    - $ref: "../schemas/search.yaml#/components/parameters/Search"
+    - $ref: "../schemas/search.yaml#/components/parameters/Order"
+      example:
+          id: DESC
+    - $ref: "../schemas/search.yaml#/components/parameters/Filter"
+      example:
+        id: 1
+        createdAt:
+          "$gte": '2026-01-01T00:00:00.000Z'
+      
+  responses:
+    "200":
+      description: "Pesquisa permissões"
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-list-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "../schemas/permission.yaml"
+    "400":
+      description: Falha na requisição
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Dados inválidos
+              value:
+                success: false
+                error: "VALIDATION_ERROR"
+                message: "order.id: Invalid option: expected one of \"ASC\"|\"DESC\""
+    "401":
+      $ref: "../schemas/error-unauthorized.yaml"
+      
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+
+delete:
+  tags:
+    -  Permission
+  summary: Deleta várias permissões
+  description: >
+    Permite deletar várias permissões em massa, recebendo como parâmetro um array de ids das mesmas.<br>
+    Traz na resposta a lista de ids excluídos ou inexistentes no banco de dados.<br>
+    obs: não consiste existência no banco, ou seja, se ao fim da transação todos ids inexistirem retornará sucesso.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            ids:
+              type: array
+              items:
+                type: number
+              description: Lista dos ids das permissões que devem ser deletadas.
+              example: [1,2,3]
+  responses:
+    "200":
+      description: Permissões excluídas
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    type: array
+                    items:
+                      type: number
+                    example: [2,3,6]
+    "400":
+      description: Falha na requisição
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Dados inválidos
+              value:
+                success: false
+                error: "VALIDATION_ERROR"
+                message: "ids.0: Invalid input: expected number, received string"
+    "401":
+      $ref: "../schemas/error-unauthorized.yaml"
+      
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"

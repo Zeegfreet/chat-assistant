@@ -1,0 +1,15 @@
+type: object
+
+properties:
+  resource:
+    type: string
+    example: UPDATED_RESOURCE
+    minLength: 3
+    maxLength: 25
+    description: Nome do recurso a qual esta permissão permite a utilização.
+
+  method:
+    type: string
+    example: CREATE
+    enum: [ "CREATE", "READ", "UPDATE", "DELETE" ]
+    description: Método do recurso a qual esta permissão permite a utilização.

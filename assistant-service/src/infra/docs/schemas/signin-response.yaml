@@ -1,0 +1,46 @@
+type: object
+required:
+  - id
+  - name
+  - email
+
+properties:
+  id:
+    type: integer
+    example: 1
+
+  name:
+    type: string
+    example: John Doe
+
+  email:
+    type: string
+    example: john@doe.com
+
+  avatar:
+    type: string
+    nullable: true
+
+  isActive:
+    type: boolean
+
+  roles:
+    type: array
+    items:
+      type: string
+    example: ["Manager", "CFO"]
+  
+  permissions:
+    type: array
+    items:
+      type: object
+      properties:
+        resource:
+          type: string
+        method:
+          type: string
+    example:
+      - resource: INVOICES
+        method: CREATE
+      - resource: INVOICES
+        method: UPDATE

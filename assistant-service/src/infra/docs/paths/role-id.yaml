@@ -1,0 +1,185 @@
+get:
+  tags:
+    - Role
+  summary: Exibe Role
+  description: >
+    Localiza e exibe role.
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: Id da role pesquisada.
+      schema:
+        type: integer
+        example: 1
+  responses:
+    "200":
+      description: Localizado com sucesso
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    $ref: "../schemas/role.yaml"
+    "400":
+      description: Requisição errada
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Dados inválidos
+              value:
+                success: false
+                error: "VALIDATION_ERROR"
+                message: "id: Invalid input: expected number, received NaN"
+    "401":
+      $ref: "../schemas/error-unauthorized.yaml"
+
+    "404":
+      description: "Não encontrado"
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            notFound:
+              summary: Não encontrado
+              value:
+                success: false
+                error: "NOT_FOUND_ERROR"
+                message: "Not found role with received id."
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+
+delete:
+  tags:
+    - Role
+  summary: Deleta uma role
+  description: >
+    Localiza e deleta uma role pelo id fornecido.
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: Id da role pesquisada.
+      schema:
+        type: integer
+        example: 1
+  responses:
+    "204":
+      description: Role excluída
+      
+    "400":
+      description: Requisição errada
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Dados inválidos
+              value:
+                success: false
+                error: "VALIDATION_ERROR"
+                message: "id: Invalid input: expected number, received NaN"
+    "401":
+      $ref: "../schemas/error-unauthorized.yaml"
+
+    "404":
+      description: Não encontrado
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            notFound:
+              summary: Não encontrado
+              value:
+                success: false
+                error: "NOT_FOUND_ERROR"
+                message: "Not found role with received id."
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+
+patch:
+  tags:
+    - Role
+  summary: Atualiza uma role
+  description: >
+    Localiza uma role pelo Id e depois atualiza seus dados.<br>
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: Id da role pesquisada.
+      schema:
+        type: integer
+        example: 1
+  requestBody:
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: "../schemas/role-update.yaml"
+  responses:
+    "200":
+      description: Role atualizada
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml"
+              - type: object
+                properties:
+                  resources:
+                    $ref: "../schemas/role.yaml"
+      
+    "400":
+      description: Requisição errada
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            validationError:
+              summary: Dados inválidos
+              value:
+                success: false
+                error: "VALIDATION_ERROR"
+                message: "role: Too big: expected string to have <=50 characters"
+    
+    "401":
+      $ref: "../schemas/error-unauthorized.yaml"
+
+    "404":
+      description: "Não encontrado"
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+          examples:
+            notFound:
+              summary: Não encontrado
+              value:
+                success: false
+                error: "NOT_FOUND_ERROR"
+                message: "Role not found with received id."
+    "500":
+      description: Erro interno no servidor
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"  

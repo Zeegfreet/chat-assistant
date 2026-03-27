@@ -1,0 +1,56 @@
+openapi: 3.0.0
+
+info:
+  title: Hermes Auth Service
+  version: 1.0.0
+  description: Esta é uma api de autenticação de usuários, utilizada para criação, atualização, exclusão e busca de usuários, seus perfis de acessos e também suas permissões.  
+
+servers:
+  - url: http://localhost:3000
+    description: Local Host
+
+security:
+  - cookieAuth: []
+
+paths:
+
+  /pub/signup:
+    $ref: "./paths/auth-signup.yaml"
+  /pub/signin:
+    $ref: "./paths/auth-signin.yaml"
+  /v1/user:
+    $ref: "./paths/user.yaml"
+  /v1/user/{id}:
+    $ref: "./paths/user-id.yaml"
+  
+  /v1/permission:
+    $ref: "./paths/permission.yaml"
+  /v1/permission/{id}:
+    $ref: "./paths/permission-id.yaml"
+  
+  /v1/role:
+    $ref: "./paths/role.yaml"
+  /v1/role/{id}:
+    $ref: "./paths/role-id.yaml"
+
+components:
+
+  securitySchemes:
+      cookieAuth:
+        type: apiKey
+        in: cookie
+        name: Authorization
+        description: Deve conter accessToken no formato bearer que será enviado nas requisições privadas ao servidor para autenticação do usuário.
+
+  schemas:
+
+    SignUp:
+      $ref: "./schemas/signup.yaml"
+    SignIn:
+      $ref: "./schemas/signin.yaml"
+    User:
+      $ref: "./schemas/user.yaml"
+    Role:
+      $ref: "./schemas/role.yaml"
+    Permission:
+      $ref: "./schemas/permission.yaml"

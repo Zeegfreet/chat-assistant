@@ -1,0 +1,15 @@
+type: object
+required:
+  - success
+  - message
+
+properties:
+  success:
+    type: boolean
+    example: false
+  error:
+    type: string
+    example: UNKNOWN_ERROR
+  message:
+    type: string
+    example: "Internal Server Error"

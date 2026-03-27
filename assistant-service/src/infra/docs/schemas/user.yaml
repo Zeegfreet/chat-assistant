@@ -1,0 +1,33 @@
+type: object
+required:
+  - id
+  - name
+  - email
+
+properties:
+  id:
+    type: integer
+    example: 1
+
+  name:
+    type: string
+    example: John Doe
+
+  email:
+    type: string
+    example: john@doe.com
+
+  avatar:
+    type: string
+    nullable: true
+
+  isActive:
+    type: boolean
+
+  createdAt:
+    type: string
+    format: date-time
+
+  updatedAt:
+    type: string
+    format: date-time

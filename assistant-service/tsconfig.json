@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2024",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "noImplicitAny": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "types": [
+      "node",
+      "jest"
+    ],
+    "paths": {
+      "@data/*": [
+        "src/data/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@domain/*": [
+        "src/domain/*"
+      ],
+      "@db/*": [
+        "src/infra/*"
+      ],
+      "@presentation/*": [
+        "./src/presentation/*"
+      ],
+      "@src/*": [
+        "./src/*"
+      ]
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+  },
+  "include": [
+    "src/**/*"
+, "src/domain/useCases/auth/.ts"  ]
+}
