@@ -16,7 +16,7 @@ export class GeminiSendMessage implements IMessageToAi {
             contents: [
                 {
                     role: "system",
-                    parts: [{ text: prompt }]
+                    parts: [{ text: prompt }],
                 },
                 {
                     role: "user",
