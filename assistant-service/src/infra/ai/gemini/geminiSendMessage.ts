@@ -10,7 +10,7 @@ export class GeminiSendMessage implements IMessageToAi {
         return GeminiConnector.getInstance().getAgent();
     }
 
-    async message(prompt: IMessageToAi.Prompt, message: IMessageToAi.Message): Promise<IMessageToAi.Response> {
+    async message(prompt: IMessageToAi.Prompt, messages: IMessageToAi.Messages[]): Promise<IMessageToAi.Response> {
         const response = await this.agent.models.generateContent({
             model: this.modelName,
             contents: [
@@ -18,10 +18,10 @@ export class GeminiSendMessage implements IMessageToAi {
                     role: "system",
                     parts: [{ text: prompt }],
                 },
-                {
-                    role: "user",
-                    parts: [{ text: message }]
-                }
+                ...messages.map((message) => ({
+                    role: message.role === "model" ? "system" : "user",
+                    parts: [{ text: message.text }]
+                }))
             ]
         });
 

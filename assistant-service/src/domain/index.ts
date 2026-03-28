@@ -68,3 +68,5 @@ export * from "./repositorys/memory/messages/memoryVerifyIfMessagesExists";
 export * from "./repositorys/memory/messages/memoryPopulateMessagesRepository";
 export * from "./repositorys/memory/messages/memoryFindHistoryMessagesRepository";
 export * from "./repositorys/memory/messages/memoryAddMessageRepository";
+export * from "./protocols/services/iGetChatContextService";
+export * from "./protocols/services/iAddMessageWithCacheService";

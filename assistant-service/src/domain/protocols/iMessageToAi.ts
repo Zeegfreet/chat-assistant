@@ -1,11 +1,12 @@
+import { MessageModel } from "@domain/models/MessageModel";
 
 export interface IMessageToAi {
-    message(prompt: IMessageToAi.Prompt, message: IMessageToAi.Message): Promise<IMessageToAi.Response>
+    message(prompt: IMessageToAi.Prompt, messages: IMessageToAi.Messages[]): Promise<IMessageToAi.Response>
 }
 
 export namespace IMessageToAi {
     export type Prompt  = string;
-    export type Message = string;
+    export type Messages = MessageModel;
 
     export type Response = {
         tokens: number;
