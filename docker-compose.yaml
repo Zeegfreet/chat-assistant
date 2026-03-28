@@ -1,0 +1,45 @@
+services:
+  db-dev:
+    image: postgres:18
+    container_name: db-dev
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./dev/db:/var/lib/postgresql
+      - ./dev-scripts/startsql:/docker-entrypoint-initdb.d
+    networks:
+      - assistant-network
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 1s
+
+  redis-dev:
+    image: redis:alpine
+    container_name: redis-dev
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./dev/redis:/data
+    command: redis-server --appendonly yes
+    networks:
+      - assistant-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+networks:
+  assistant-network:
+    

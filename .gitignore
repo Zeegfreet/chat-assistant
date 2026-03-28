@@ -2,3 +2,5 @@ assistant-service/node_modules
 assistant-service/certs
 assistant-service/logs
 assistant-service/.env
+dev
+.env
