@@ -2,7 +2,7 @@ import { DbSearchCredentials } from "@data/useCases";
 import { TypeOrmSearchCredentialsRepository } from "@db/db/repositories";
 import { TypeOrmSearchHelper } from "@db/db/repositories/helper/typeOrmSearchHelper";
 
-export const makeDbFindCredentialsFactory = () => {
+export const makeDbSearchCredentialsFactory = () => {
     const searchHelper = new TypeOrmSearchHelper(
         ["name"],
         ["id", "name", "createdAt", "updatedAt"],

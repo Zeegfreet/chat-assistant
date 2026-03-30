@@ -6,6 +6,6 @@ export interface UpdateCredential {
 
 export namespace UpdateCredential{
     export type Id = number
-    export type Payload = Omit<CredentialsModel, "id" | "createdAt" | "updatedAt">
+    export type Payload = Partial<Omit<CredentialsModel, "id" | "createdAt" | "updatedAt">>
     export type Result = CredentialsModel
 }
