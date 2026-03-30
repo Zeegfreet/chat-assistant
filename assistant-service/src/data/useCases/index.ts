@@ -24,3 +24,8 @@ export * from "./role/dbUpdateRole";
 export * from "./profile/dbFindProfileByPk";
 export * from "./logger/appLogger";
 export * from "./auth/dbmVerifySessionIsInBlackList";
+export * from "./credentials/dbAddCredential";
+export * from "./credentials/dbDeleteCredential";
+export * from "./credentials/dbFindCredentialByPk";
+export * from "./credentials/dbSearchCredentials";
+export * from "./credentials/dbUpdateCredentials";

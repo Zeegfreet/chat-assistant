@@ -23,3 +23,8 @@ export * from "./user/typeOrmLoadAuthUserByPkRepository";
 export * from "./session/typeOrmAddSessionRepository";
 export * from "./session/typeOrmFindsessionByPkRepository";
 export * from "./session/typeOrmUpdateSessionRepository";
+export * from "./credentials/typeOrmAddCredentialRepository";
+export * from "./credentials/typeOrmDeleteCredentialRepository";
+export * from "./credentials/typeOrmFindCredentialByPkRepository";
+export * from "./credentials/typeOrmSearchCredentialsRepository";
+export * from "./credentials/typeOrmUpdateCredentialRepository";

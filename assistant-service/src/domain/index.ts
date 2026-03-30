@@ -76,3 +76,8 @@ export * from "./repositorys/credentials/searchCredentialsRepository";
 export * from "./repositorys/credentials/updateCredentialRepository";
 export * from "./protocols/services/iGetChatContextService";
 export * from "./protocols/services/iAddMessageWithCacheService";
+export * from "./useCases/credentials/addCredential";
+export * from "./useCases/credentials/deleteCredential";
+export * from "./useCases/credentials/findCredentialByPk";
+export * from "./useCases/credentials/searchCredentials";
+export * from "./useCases/credentials/updateCredential";
