@@ -12,6 +12,7 @@ import messaging from "./messagingRoutes";
 import test from "./testRoutes";
 import credentials from "./credentialsRoutes";
 import prompts from "./promptsRoutes";
+import agents from "./agentsRoutes";
 
 const setupRouter = (app: Express) => {
     app.use("/",
@@ -29,7 +30,8 @@ const setupRouter = (app: Express) => {
         expressMiddlewareAdapter(makeStateLessLoadTokenMiddlewareFactory()),
         profile,
         credentials,
-        prompts
+        prompts,
+        agents
     );
     app.use(
         "/admin",

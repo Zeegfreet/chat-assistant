@@ -7,14 +7,22 @@ import { Prompts } from "./prompts.entity";
 export class AiAgents extends EntityTemplate {
     @Column({ unique: true })
         name: string;
+
+    @Column({ unique: true })
+        slug: string;
+
     @Column()
         model: string;
+
+    @Column({ default: true })
+        isActive?: boolean;
+
     @Column()
         provider: string;
     
     @OneToMany(() => Credentials, credentials => credentials.agents)
-        credentials: Credentials;
+        credentials?: Credentials;
     
     @OneToMany(() => Prompts, prompts => prompts.agents)
-        prompt: Prompts;
+        prompt?: Prompts;
 }
