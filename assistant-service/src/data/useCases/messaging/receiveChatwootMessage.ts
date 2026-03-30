@@ -10,17 +10,19 @@ export class ReceiveChatwootMessage implements IQueueReceivedMessage {
         const targetQueue = "chatwoot-pimpao";
 
         const message: IMessageJobData = {
+            accountId: String(params.account.id),
             conversationId: String(params.conversation.id),
             contactId: String(params.sender.id),
-            messageContent: params.content,
-            accountContext: {
-                accountId: String(params.account.id),
+            role: "user",
+            message_type: "text",
+            text: params.content,
+            message_content: {
                 inboxId: String(params.inbox.id),
-            },
-            contactInfo: {
-                name: params.sender.name,
-                email: params.sender.email,
-                phone: params.sender.phone_number,
+                contactInfo: {
+                    name: params.sender.name,
+                    email: params.sender.email,
+                    phone: params.sender.phone_number,
+                }
             }
         };
 

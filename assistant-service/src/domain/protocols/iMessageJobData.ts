@@ -1,15 +1,10 @@
 
-export interface IMessageJobData {
+export interface IMessageJobData<T = Record<any, any>> {
+    accountId: string;
     conversationId: string;
     contactId: string;
-    messageContent: string;
-    accountContext: {
-        accountId: string;
-        inboxId: string;
-    },
-    contactInfo: {
-        name: string;
-        email?: string;
-        phone?: string;
-    }
+    role: "model" | "user";
+    message_type: string,
+    text: string;
+    message_content: T
 }

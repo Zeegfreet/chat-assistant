@@ -11,17 +11,17 @@ export class ProcessChatwootMessage implements IProcessReceivedMesage {
         private readonly getChatContextService: IGetChatContextService,
         private readonly addMessageToContext: IAddMessageWithCacheService
     ){}
-    async proccess(params: IMessageJobData): Promise<void> {
+    async proccess(params: IMessageJobData): Promise<IProcessReceivedMesage.Result> {
         const prompt = await this.getPrompt.findByName(this.promptName);
         if(!prompt) throw new NotFoundError("Prompt not found");
 
         const userMessage = `
-            nome: ${params.contactInfo.name}
-            mensagem: ${params.messageContent}
+            nome: ${params.message_content.contactInfo.name}
+            mensagem: ${params.text}
         `;
 
         await this.addMessageToContext.add({
-            accountId: params.accountContext.accountId,
+            accountId: params.accountId,
             conversationId: params.conversationId,
             role: "user",
             message_type: "incoming",
@@ -30,12 +30,12 @@ export class ProcessChatwootMessage implements IProcessReceivedMesage {
             content: null,
         });
 
-        const context = await this.getChatContextService.getContext(params.accountContext.accountId, params.conversationId);
+        const context = await this.getChatContextService.getContext(params.accountId, params.conversationId);
 
         const response = await this.ai.message(prompt.prompt, context);
 
         await this.addMessageToContext.add({
-            accountId: params.accountContext.accountId,
+            accountId: params.accountId,
             conversationId: params.conversationId,
             role: "model",
             message_type: "outgoing",
@@ -44,7 +44,10 @@ export class ProcessChatwootMessage implements IProcessReceivedMesage {
             content: null,
         });
 
-        console.log(response);
+        return {
+            action: "answer",
+            message: response.message
+        };
     }
 
 }
