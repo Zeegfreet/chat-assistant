@@ -29,3 +29,8 @@ export * from "./credentials/dbDeleteCredential";
 export * from "./credentials/dbFindCredentialByPk";
 export * from "./credentials/dbSearchCredentials";
 export * from "./credentials/dbUpdateCredentials";
+export * from "./prompts/dbAddPrompt";
+export * from "./prompts/dbDeletePrompt";
+export * from "./prompts/dbFindPromptByPk";
+export * from "./prompts/dbSearchPrompts";
+export * from "./prompts/dbUpdatePrompt";

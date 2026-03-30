@@ -11,6 +11,7 @@ import jwk from "./jwkRoutes";
 import messaging from "./messagingRoutes";
 import test from "./testRoutes";
 import credentials from "./credentialsRoutes";
+import prompts from "./promptsRoutes";
 
 const setupRouter = (app: Express) => {
     app.use("/",
@@ -27,7 +28,8 @@ const setupRouter = (app: Express) => {
     app.use("/v1",
         expressMiddlewareAdapter(makeStateLessLoadTokenMiddlewareFactory()),
         profile,
-        credentials
+        credentials,
+        prompts
     );
     app.use(
         "/admin",

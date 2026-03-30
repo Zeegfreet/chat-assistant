@@ -28,3 +28,8 @@ export * from "./credentials/typeOrmDeleteCredentialRepository";
 export * from "./credentials/typeOrmFindCredentialByPkRepository";
 export * from "./credentials/typeOrmSearchCredentialsRepository";
 export * from "./credentials/typeOrmUpdateCredentialRepository";
+export * from "./prompts/typeOrmAddPromptRepository";
+export * from "./prompts/typeOrmDeletePromptRepository";
+export * from "./prompts/typeOrmFindPromptByPkRepository";
+export * from "./prompts/typeOrmSearchPromptsRepository";
+export * from "./prompts/typeOrmUpdatePromptRepository";
