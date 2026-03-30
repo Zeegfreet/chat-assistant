@@ -10,6 +10,7 @@ import profile from "./profileRoutes";
 import jwk from "./jwkRoutes";
 import messaging from "./messagingRoutes";
 import test from "./testRoutes";
+import credentials from "./credentialsRoutes";
 
 const setupRouter = (app: Express) => {
     app.use("/",
@@ -26,6 +27,7 @@ const setupRouter = (app: Express) => {
     app.use("/v1",
         expressMiddlewareAdapter(makeStateLessLoadTokenMiddlewareFactory()),
         profile,
+        credentials
     );
     app.use(
         "/admin",
