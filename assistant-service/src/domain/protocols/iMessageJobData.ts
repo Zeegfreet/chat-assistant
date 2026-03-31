@@ -6,5 +6,6 @@ export interface IMessageJobData<T = Record<any, any>> {
     role: "model" | "user";
     message_type: string,
     text: string;
+    slug?: string;
     message_content: T
 }

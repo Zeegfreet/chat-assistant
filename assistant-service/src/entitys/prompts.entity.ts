@@ -1,6 +1,5 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity } from "typeorm";
 import { EntityTemplate } from "./entity-template";
-import { AiAgents } from "./ai.agents.entity";
 
 @Entity()
 export class Prompts extends EntityTemplate {
@@ -8,7 +7,5 @@ export class Prompts extends EntityTemplate {
         name: string;
     @Column()
         prompt: string;
-    
-    @ManyToOne(() => AiAgents, agents => agents.prompt)
-        agents: AiAgents;
+
 }

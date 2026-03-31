@@ -9,7 +9,11 @@ export class TypeOrmFindAiAgentBySlugRepository implements FindAiAgentBySlugRepo
             .getCollection(AiAgents);
     }
     async findBySlug(slug: FindAiAgentBySlugRepository.Slug): Promise<FindAiAgentBySlugRepository.Result> {
-        const aiAgent = await this.repository.findOne({ where: { slug } });
+        const aiAgent = await this.repository.findOne({ where: { slug }, 
+            relations: {
+                credentials: true
+            }
+        });
         return aiAgent;
     }
     

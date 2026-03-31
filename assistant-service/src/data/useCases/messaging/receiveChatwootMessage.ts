@@ -1,13 +1,19 @@
-import { IMessageJobData, IMessageQueue } from "@domain/index";
+import { NotFoundError } from "@domain/errors/NotFoundError";
+import { FindAiAgentBySlugRepository, IMessageJobData, IMessageQueue } from "@domain/index";
 import { IChatwootReceivedMessage } from "@domain/models/IChatwootReceivedMessage";
 import { IQueueReceivedMessage } from "@domain/useCases/messaging/iQueueReceivedMessage";
 
 export class ReceiveChatwootMessage implements IQueueReceivedMessage {
     constructor(
-        private readonly queueProvider: IMessageQueue
+        private readonly queueProvider: IMessageQueue,
+        private readonly findAgentBySlugRepository: FindAiAgentBySlugRepository
     ){}
-    async queue(params: IQueueReceivedMessage.Params<IChatwootReceivedMessage>): Promise<IQueueReceivedMessage.Result> {
+    async queue(params: IQueueReceivedMessage.Params<IChatwootReceivedMessage & { slug: string }>): Promise<IQueueReceivedMessage.Result> {
         const targetQueue = "chatwoot-pimpao";
+
+        const agent = await this.findAgentBySlugRepository.findBySlug(params.slug);
+
+        if(!agent) throw new NotFoundError("Agent not found.");
 
         const message: IMessageJobData = {
             accountId: String(params.account.id),
@@ -16,6 +22,7 @@ export class ReceiveChatwootMessage implements IQueueReceivedMessage {
             role: "user",
             message_type: "text",
             text: params.content,
+            slug: params.slug,
             message_content: {
                 inboxId: String(params.inbox.id),
                 contactInfo: {

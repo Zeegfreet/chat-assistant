@@ -1,6 +1,6 @@
 import { expressRouterAdapter } from "@app/adapters/expressRouterAdapter";
 import { expressValidationAdapter } from "@app/adapters/expressValidationAdapter";
-import { makeAddAiAgentControllerFactory, makeAddAiAgentValidationCompositeFactory, makeDeleteAiAgentControllerFactory, makeFindAiAgentByPkControllerFactory, makeSearchAiAgentControllerFactory, makeUpdateAiAgentControllerFactory, makeUpdateAiAgentValidationCompositeFactory, searchParamsValidationCompositeFactory, singleIdValidationCompositeFactory } from "@app/factories";
+import { makeAddAiAgentControllerFactory, makeAddAiAgentValidationCompositeFactory, makeDeleteAiAgentControllerFactory, makeFindAiAgentByPkControllerFactory, makeFindAiAgentBySlugControllerFactory, makeSearchAiAgentControllerFactory, makeUpdateAiAgentControllerFactory, makeUpdateAiAgentValidationCompositeFactory, searchParamsValidationCompositeFactory, singleIdValidationCompositeFactory } from "@app/factories";
 import { Router } from "express";
 
 const router = Router();
@@ -15,8 +15,7 @@ router
         expressRouterAdapter(makeDeleteAiAgentControllerFactory())
     )
     .get("/agents/agent/:slug",
-        expressValidationAdapter(singleIdValidationCompositeFactory()),
-        expressRouterAdapter(makeFindAiAgentByPkControllerFactory())   
+        expressRouterAdapter(makeFindAiAgentBySlugControllerFactory())   
     )
     .get("/agents/:id",
         expressValidationAdapter(singleIdValidationCompositeFactory()),

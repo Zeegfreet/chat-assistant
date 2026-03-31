@@ -18,6 +18,7 @@ export class TypeOrmAddAiAgentRepository implements AddAiAgentRepository {
         try {
             
             const aiAgentToSave = this.repository.create(payload);
+
             const savedAiAgent =  await this.repository.save(aiAgentToSave);
             return {
                 ...savedAiAgent

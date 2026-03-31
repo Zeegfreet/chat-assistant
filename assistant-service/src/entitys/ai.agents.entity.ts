@@ -1,7 +1,6 @@
-import { Column, Entity, OneToMany } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 import { EntityTemplate } from "./entity-template";
 import { Credentials } from "./credentials.entity";
-import { Prompts } from "./prompts.entity";
 
 @Entity({ name: "ai_agents" })
 export class AiAgents extends EntityTemplate {
@@ -19,10 +18,11 @@ export class AiAgents extends EntityTemplate {
 
     @Column()
         provider: string;
+
+    @Column()
+        prompt: string;
     
-    @OneToMany(() => Credentials, credentials => credentials.agents)
+    @ManyToOne(() => Credentials, credentials => credentials.agents)
         credentials?: Credentials;
-    
-    @OneToMany(() => Prompts, prompts => prompts.agents)
-        prompt?: Prompts;
+
 }

@@ -12,15 +12,19 @@ export class TypeOrmUpdateAiAgentRepository implements UpdateAiAgentRepository {
             .getInstance()
             .getCollection(AiAgents);
     }
+    
     async update(id: UpdateAiAgentRepository.Id, payload: UpdateAiAgentRepository.Payload): Promise<UpdateAiAgentRepository.Result> {
         try {
-            
             const aiAgentToUpdate = await this.repository.findOneBy({ id });
             if(!aiAgentToUpdate) throw new NotFoundError("Ai Agent not found with received id.");
+            
             const toUpdateAiAgent = { ...aiAgentToUpdate, ...payload };
+
             const updateAiAgent = await this.repository.save(toUpdateAiAgent);
+
             return updateAiAgent;
         } catch (error) {
+            console.log(error);
             const errorMapped = this.mapper.map(error);
             if(errorMapped.kind === "conflict"){
                 throw new AlreadyExistsError("Already exists ai agent with de received name or slug");

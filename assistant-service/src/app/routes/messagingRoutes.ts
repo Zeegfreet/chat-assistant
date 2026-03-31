@@ -5,11 +5,8 @@ import { Router } from "express";
 const router = Router();
 
 router
-    .post("/pimpao", 
+    .post("/chatwoot/:slug",
         expressRouterAdapter(makeReceiveChatwootMessageControllerFactory())
-    )
-    .post("/chatwoot/:agent", () => {
-        
-    });
+    );
 
 export default router;

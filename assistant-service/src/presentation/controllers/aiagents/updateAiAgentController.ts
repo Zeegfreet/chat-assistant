@@ -17,7 +17,7 @@ export class UpdateAiAgentController implements Controller {
             const pk = this.to_pk(rawPk);
 
             const updatedAiAgent = await this.updateAiAgent.update(pk, payload);
-
+            
             return onSuccess(updatedAiAgent);
             
         } catch (error) {
@@ -29,9 +29,14 @@ export class UpdateAiAgentController implements Controller {
         const dto = {} as UpdateAiAgent.Payload;
 
         for(const [key, value] of Object.entries(raw)){
-            if(["name", "slug", "model", "provider"].includes(key) && value){
+            if(["name", "slug", "model", "provider", "prompt"].includes(key) && value){
                 (dto[key as keyof UpdateAiAgent.Payload] as string )= String(value).trim();
             }
+        }
+
+        if(raw.credentials && raw.credentials.id){
+            dto.credentials = {} as UpdateAiAgent.Payload["credentials"];
+            dto.credentials["id"] = raw.credentials.id;
         }
 
         if(raw.isActive){

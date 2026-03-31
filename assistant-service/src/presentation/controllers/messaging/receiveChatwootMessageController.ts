@@ -8,7 +8,8 @@ export class ReceiveChatwootMessageController implements Controller {
     ){}
     async handle(req: Controller.Request): Promise<Controller.Response<any>> {
         try {
-            const payload = req.body;
+            const { slug } = req.params;
+            const payload = {...req.body, slug };
             
             if(!payload.message_type || payload.message_type && payload.message_type != "incoming"){
                 return onSuccessNoBody();

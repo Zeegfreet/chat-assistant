@@ -29,9 +29,14 @@ export class AddAiAgentController implements Controller {
         const dto = {} as AddAiAgent.Params;
     
         for(const [key, value] of Object.entries(raw)){
-            if(["name", "slug", "model", "provider"].includes(key) && value){
+            if(["name", "slug", "model", "provider", "prompt"].includes(key) && value){
                 (dto[key as keyof AddAiAgent.Params] as string) = String(value).trim();
             }
+        }
+
+        if(raw.credentials && raw.credentials.id){
+            dto.credentials = {} as AddAiAgent.Params["credentials"];
+            dto.credentials["id"] = raw.credentials.id;
         }
 
         if(raw.isActive){
@@ -41,13 +46,18 @@ export class AddAiAgentController implements Controller {
         return dto;
     }
 
-    private toPresenter(prompt: AddAiAgent.Result){
+    private toPresenter(agent: AddAiAgent.Result){
         return {
-            id: prompt.id,
-            name: prompt.name,
-            prompt: prompt.prompt,
-            createdAt: prompt.createdAt,
-            updatedAt: prompt.updatedAt,
+            id: agent.id,
+            name: agent.name,
+            slug: agent.slug,
+            model: agent.model,
+            provider: agent.provider,
+            isActive: agent.isActive,
+            credentials: agent.credentials,
+            prompt: agent.prompt,
+            createdAt: agent.createdAt,
+            updatedAt: agent.updatedAt,
         };
     }
 

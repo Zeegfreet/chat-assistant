@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { EntityTemplate } from "./entity-template";
 import { AiAgents } from "./ai.agents.entity";
 
@@ -16,6 +16,6 @@ export class Credentials extends EntityTemplate {
     @Column({ nullable: true, name: "account_id" })
         accountId?: string;
     
-    @ManyToOne(() => AiAgents, agents => agents.credentials)
+    @OneToMany(() => AiAgents, agents => agents.credentials)
         agents?: AiAgents;
 }
