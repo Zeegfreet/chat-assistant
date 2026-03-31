@@ -1,4 +1,9 @@
 import z from "zod";
+import { addSignedSchema } from "../signeds/addSignedSchema";
+
+const signedId  = z.object({
+    id: z.number()
+}).strict();
 
 export const addAiAgentSchema = z.object({
     name: z.string().min(3).max(50),
@@ -9,5 +14,6 @@ export const addAiAgentSchema = z.object({
     prompt: z.string(),
     credentials: z.object({
         id: z.number()
-    }).optional()
+    }).optional(),
+    signeds: z.array(z.union([addSignedSchema.strict(), signedId])).optional()
 });

@@ -39,6 +39,11 @@ export class AddAiAgentController implements Controller {
             dto.credentials["id"] = raw.credentials.id;
         }
 
+        if(raw.signeds){
+            dto.signeds = [] as AddAiAgent.Params["signeds"];
+            dto.signeds = [...raw.signeds];
+        }
+
         if(raw.isActive){
             dto.isActive = raw.isActive;
         }

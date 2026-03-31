@@ -1,5 +1,6 @@
 import { BaseEntity } from "./BaseEntity";
 import { CredentialsModel } from "./CredentialsModel";
+import { SignedsModel } from "./SignedsModel";
 
 export class AiAgentsModel extends BaseEntity {
     name: string;
@@ -9,4 +10,5 @@ export class AiAgentsModel extends BaseEntity {
     prompt: string;
     isActive?: boolean;
     credentials?: CredentialsModel;
+    signeds?: SignedsModel[];
 }

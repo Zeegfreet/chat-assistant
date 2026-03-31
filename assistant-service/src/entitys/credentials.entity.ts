@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
 import { EntityTemplate } from "./entity-template";
 import { AiAgents } from "./ai.agents.entity";
 
