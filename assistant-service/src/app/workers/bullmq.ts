@@ -1,22 +1,22 @@
-import { chatwootPimpaoWorker } from "./chatwoot-pimpao-worker";
-import { chatwootResponse } from "./chatwoot-response";
+import { agentMessageReceivedWorker } from "./agent-message-received-worker";
+import { agentMessageResponseWorker } from "./agent-message-response-worker";
 
 export const setupWorkers  = () => {
     console.log("--- 🚀 Inicializando Workers BullMQ ---");
 
-    chatwootPimpaoWorker.on("completed", (job) => {
+    agentMessageReceivedWorker.on("completed", (job) => {
         console.log(`[Worker]: Job ${job.id} finalizado com sucesso` );
     });
 
-    chatwootPimpaoWorker.on("failed", (job, err) => {
+    agentMessageReceivedWorker.on("failed", (job, err) => {
         console.log(`[Worker] job ${job.id} falhou: ${err.message}` );
     });
 
-    chatwootResponse.on("completed", (job) => {
+    agentMessageResponseWorker.on("completed", (job) => {
         console.log(`[Worker]: Job ${job.id} finalizado com sucesso` );
     });
 
-    chatwootResponse.on("failed", (job, err) => {
+    agentMessageResponseWorker.on("failed", (job, err) => {
         console.log(`[Worker] job ${job.id} falhou: ${err.message}` );
     });
    

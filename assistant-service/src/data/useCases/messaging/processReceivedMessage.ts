@@ -3,7 +3,7 @@ import { FindAiAgentBySlugRepository, IAddMessageWithCacheService, IGetChatConte
 import { IAgentProvider } from "@domain/protocols/IAgentProvider";
 import { IProcessReceivedMesage } from "@domain/useCases/messaging/iProcessReceivedMessage";
 
-export class ProcessChatwootMessage implements IProcessReceivedMesage {
+export class ProcessReceivedMessage implements IProcessReceivedMesage {
     constructor(
         private readonly aiAgentProvider: IAgentProvider,
         private readonly findAgentBySlugRepository: FindAiAgentBySlugRepository,
@@ -25,15 +25,15 @@ export class ProcessChatwootMessage implements IProcessReceivedMesage {
         }
 
         const userMessage = `
-            nome: ${params.message_content.contactInfo.name}
+            nome: ${params.contact.name}
             mensagem: ${params.text}
         `;
 
         await this.addMessageToContext.add({
             accountId: params.accountId,
             conversationId: params.conversationId,
-            role: "user",
-            message_type: "incoming",
+            role: params.role,
+            message_type: params.message_type,
             content_type: "text",
             text: userMessage,
             content: null,

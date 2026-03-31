@@ -1,12 +1,12 @@
 import { expressRouterAdapter } from "@app/adapters/expressRouterAdapter";
-import { makeReceiveChatwootMessageControllerFactory } from "@app/factories/controllers/messaging/makeReceiveChatwootMessageControllerFactory";
+import { makeQueueReceivedChatwootMessageControllerFactory } from "@app/factories/controllers/messaging/makeQueueReceivedChatwootMessageControllerFactory";
 import { Router } from "express";
 
 const router = Router();
 
 router
     .post("/chatwoot/:slug",
-        expressRouterAdapter(makeReceiveChatwootMessageControllerFactory())
+        expressRouterAdapter(makeQueueReceivedChatwootMessageControllerFactory())
     );
 
 export default router;

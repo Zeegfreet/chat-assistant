@@ -1,17 +1,17 @@
 import { makeFindAiAgentBySlugRepositoryFactory } from "@app/factories/repositories/aiagents/makeFindAiAgentBySlugRepositoryFactory";
-import { ReceiveChatwootMessage } from "@data/useCases/messaging/receiveChatwootMessage";
+import { QueueReceivedMessage } from "@data/useCases/messaging/queueReceivedMessage";
 import { BullMqProducerAdapter } from "@db/messaging/bullmq/bullMqProducerAdapter";
-import { ReceiveChatwootMessageController } from "@presentation/controllers/messaging/receiveChatwootMessageController";
+import { QueueReceivedChatwootMessageController } from "@presentation/controllers/messaging/queueReceivedChatwootMessageController";
 
-export const makeReceiveChatwootMessageControllerFactory = () => {
+export const makeQueueReceivedChatwootMessageControllerFactory = () => {
     const producer = new BullMqProducerAdapter();
     const findAiAgentBySlugRepository = makeFindAiAgentBySlugRepositoryFactory();
-    const messager = new ReceiveChatwootMessage(
+    const messager = new QueueReceivedMessage(
         producer,
         findAiAgentBySlugRepository
     );
 
-    return new ReceiveChatwootMessageController(
+    return new QueueReceivedChatwootMessageController(
         messager
     );
 };

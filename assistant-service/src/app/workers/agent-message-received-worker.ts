@@ -4,9 +4,8 @@ import { makeProcessChatwootMessageFactory } from "@app/factories/useCases/messa
 import { makeQueueChatwootResponseMessageFactory } from "@app/factories/useCases/messaging/makeQueueChatwootResponseMessageFactory";
 import { IMessageJobData } from "@domain/index";
 
-export const chatwootPimpaoWorker = new Worker("chatwoot-pimpao", async (job) => {
-    console.log("Escutando evento, ", job.data);
-
+export const agentMessageReceivedWorker = new Worker("agent-message-received", async (job) => {
+    
     const jobData: IMessageJobData = job.data;
 
     const processer = makeProcessChatwootMessageFactory();
@@ -20,9 +19,10 @@ export const chatwootPimpaoWorker = new Worker("chatwoot-pimpao", async (job) =>
             conversationId: jobData.conversationId,
             contactId: jobData.contactId,
             role: "model",
-            message_type: "text",
+            message_type: "outgoing",
             text: response.message,
-            message_content: {}
+            slug: jobData.slug,
+            message_content: {} as any
         });
     }
 }, { 
