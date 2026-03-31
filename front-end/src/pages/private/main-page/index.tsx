@@ -1,10 +1,11 @@
+import { AppList } from "@/components/AppList"
+import { BoardLayout } from "@/layouts/boardLayout"
 
 export const MainPage: React.FC = () => {
 
     return (
-        <div>
-            <h1>Main Page</h1>
-
-        </div>
+        <BoardLayout>
+            <AppList />
+        </BoardLayout>
     )
 }
