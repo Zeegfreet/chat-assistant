@@ -1,0 +1,50 @@
+{
+    "signup": {
+        "name": "Name",
+        "email": "E-mail",
+        "confirm email": "E-mail Confirm",
+        "password": "Password",
+        "confirm password": "Password Confirm",
+        "messages": {
+            "errors": {
+                "title": "Signup failed",
+                "EMAIL_ALREADY_EXISTS_ERROR": "An account with this email already exists"
+            },
+            "password": {
+                "uppercase": "The password must contain 1 uppercase letter",
+                "lowercase": "The password must contain 1 lowercase letter",
+                "number": "The password must contain 1 number",
+                "special": "The password must contain at least one special character",
+                "spaces": "The password cannot contain spaces",
+                "email dont matches": "The email received is different from the email address previously provided",
+                "password dont matches": "The password received is different from the password previously provided"
+            }
+        }
+    },
+    
+    "signin": {
+        "email": "E-mail",
+        "password": "Password",
+        "messages": {
+            "errors": {
+                "title": "Sign in failed",
+                "INVALID_CREDENTIALS_ERROR": "Invalid email or password",
+                "FORBIDDEN_ERROR": "User is inactivated or blocked, please contact support"
+            }
+        }
+    },
+    "profile": {
+        "name": "name",
+        "email": "E-mail",
+        "password": "Password",
+        "new password": "New Password",
+        "Confirm Password": "Confirm Password",
+        "messages": {
+            "title": "Request failed",
+            "change password": "Password successful changed.",
+            "INVALID_CREDENTIALS_ERROR": "Password invalid."
+        }
+    },
+    "submit": "Submit",
+    "save": "Save"
+}

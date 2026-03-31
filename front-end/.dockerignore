@@ -1,0 +1,14 @@
+__tests__
+dev
+logs
+node_modules
+dist
+build
+.git
+.env
+.env.test
+eslint.config.js
+jest.config.js
+jest.setup.ts
+*.log
+certs

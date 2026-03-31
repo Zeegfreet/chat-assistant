@@ -1,0 +1,49 @@
+{
+    "signup": {
+        "name": "Nome",
+        "email": "E-mail",
+        "confirm email": "Confirme seu E-mail",
+        "password": "Senha",
+        "confirm password": "Confirme sua Senha",
+        "messages": {
+            "errors": {
+                "title": "Falha no cadastro",
+                "EMAIL_ALREADY_EXISTS_ERROR": "Já existe uma conta com este e-mail"
+            },
+            "password": {
+                "uppercase": "Senha deve conter 1 letra maiúscula",
+                "lowercase": "Senha deve conter 1 letra minúscula",
+                "number": "Senha deve conter 1 número",
+                "special": "Senha deve conter 1 letra caractere especial",
+                "spaces": "Senha não pode conter espaços",
+                "email dont matches": "E-mail recebido é diferente do e-mail fornecido anteriomente",
+                "password dont matches": "Senha recebida é diferente da senha fornecida anteriomente"
+            }
+        }
+    },
+    "signin": {
+        "email": "E-mail",
+        "password": "Senha",
+        "messages": {
+            "errors": {
+                "title": "Falha no login",
+                "INVALID_CREDENTIALS_ERROR": "E-mail ou senha inválidos",
+                "FORBIDDEN_ERROR": "Usuário está inativo ou bloqueado, por favor entre em contato com o suporte"
+            }
+        }
+    },
+    "profile": {
+        "name": "Nome",
+        "email": "E-mail",
+        "password": "Senha",
+        "new password": "Nova Senha",
+        "Confirm Password": "Confirme a Senha",
+        "messages": {
+            "title": "Falha na requisição",
+            "change password": "Senha alterada com sucesso",
+            "INVALID_CREDENTIALS_ERROR": "Senha inválida"
+        }
+    },
+    "submit": "Enviar",
+    "save": "Salvar"
+}

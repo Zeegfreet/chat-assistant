@@ -1,0 +1,37 @@
+{
+    "language": "Language",
+    "theme": "Theme",
+    "profile": {
+        "profile": "Profile",
+        "change email": "Change email",
+        "change password": "Change password",
+        "upload avatar": "Upload avatar",
+        "remove avatar": "Remove avatar"
+    },
+    "themes": {
+        "dark": "Change to dark theme",
+        "light": "Chenge to light theme"
+    },
+    "menus": {
+        "profile": {
+            "profile": "Profile",
+            "logout": "Logout"
+        }
+    },
+    "signin": {
+        "title": "Sign In",
+        "signup": "Need an account? Sign Up"
+    },
+    "signup": {
+        "title": "Sign Up",
+        "signin": "Already have an account? Sign In"
+    },
+    "404": {
+        "title": "404 - Not Found",
+        "description": "The page you are looking for does not exist."
+    },
+    "languages": {
+        "pt": "Portuguese",
+        "en": "English"
+    }
+}
