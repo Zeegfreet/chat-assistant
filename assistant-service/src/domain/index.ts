@@ -103,3 +103,6 @@ export * from "./useCases/aiagents/findAiAgentByPk";
 export * from "./useCases/aiagents/findAiAgentBySlug";
 export * from "./useCases/aiagents/searchAiAgeng";
 export * from "./useCases/aiagents/updateAiAgent";
+export * from "./repositorys/memory/aiagents/memoryAddAiAgentRepository";
+export * from "./repositorys/memory/aiagents/memoryDeleteAiAgentRepository";
+export * from "./repositorys/memory/aiagents/memoryGetAiAgentBySlugRepository";
