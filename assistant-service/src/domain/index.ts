@@ -106,3 +106,4 @@ export * from "./useCases/aiagents/updateAiAgent";
 export * from "./repositorys/memory/aiagents/memoryAddAiAgentRepository";
 export * from "./repositorys/memory/aiagents/memoryDeleteAiAgentRepository";
 export * from "./repositorys/memory/aiagents/memoryGetAiAgentBySlugRepository";
+export * from "./repositorys/chatwoot/sendChatwootMessageRepsitory";

@@ -18,6 +18,7 @@ export const agentMessageReceivedWorker = new Worker("agent-message-received", a
             accountId: jobData.accountId,
             conversationId: jobData.conversationId,
             contactId: jobData.contactId,
+            provider: "chatwoot",
             role: "model",
             message_type: "outgoing",
             text: response.message,

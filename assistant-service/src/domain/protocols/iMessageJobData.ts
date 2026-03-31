@@ -5,6 +5,7 @@ export interface IMessageJobData<T = Record<any, any>> {
     contactId: string;
     role: "model" | "user";
     message_type: "incoming" | "outgoing",
+    provider: "chatwoot" | "conventional",
     text: string;
     slug?: string;
     contact?: {

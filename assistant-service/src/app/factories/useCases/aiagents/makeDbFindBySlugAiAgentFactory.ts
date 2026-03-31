@@ -1,8 +1,8 @@
+import { makeFindAiAgentBySlugRepositoryFactory } from "@app/factories/repositories/aiagents/makeFindAiAgentBySlugRepositoryFactory";
 import { DbFindAiAgentBySlug } from "@data/useCases";
-import { TypeOrmFindAiAgentBySlugRepository } from "@db/db/repositories";
 
 export const makeDbFindBySlugAiAgentFactory = () => {
-    const findAiAgentBySlugRepository = new TypeOrmFindAiAgentBySlugRepository();
+    const findAiAgentBySlugRepository = makeFindAiAgentBySlugRepositoryFactory();
     return new DbFindAiAgentBySlug(
         findAiAgentBySlugRepository
     );

@@ -20,6 +20,7 @@ export class QueueReceivedChatwootMessageController implements Controller {
                 conversationId: raw.conversation.id,
                 contactId: raw.sender.id,
                 role: "user",
+                provider: "chatwoot",
                 message_type: "incoming",
                 text: raw.content,
                 slug: slug,

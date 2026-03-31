@@ -1,3 +1,4 @@
+import { agentMessageChatwootResponseWorker } from "./agent-message-chatwoot-response-worker";
 import { agentMessageReceivedWorker } from "./agent-message-received-worker";
 import { agentMessageResponseWorker } from "./agent-message-response-worker";
 
@@ -17,6 +18,14 @@ export const setupWorkers  = () => {
     });
 
     agentMessageResponseWorker.on("failed", (job, err) => {
+        console.log(`[Worker] job ${job.id} falhou: ${err.message}` );
+    });
+
+    agentMessageChatwootResponseWorker.on("completed", (job) => {
+        console.log(`[Worker]: Job ${job.id} finalizado com sucesso` );
+    });
+
+    agentMessageChatwootResponseWorker.on("failed", (job, err) => {
         console.log(`[Worker] job ${job.id} falhou: ${err.message}` );
     });
    
