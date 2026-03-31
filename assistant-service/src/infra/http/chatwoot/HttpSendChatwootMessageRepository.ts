@@ -4,7 +4,8 @@ import axios from "axios";
 export class HttpSendChatwootMessage implements SendChatwootMessageRepository{
     private readonly http = axios;
     async send(params: SendChatwootMessageRepository.Params): Promise<SendChatwootMessageRepository.Result> {
-        const url = `/api/accounts/${params.accountId}/conversations/${params.conversationId}`;
+        const url = `${params.baseUrl}/api/v1/accounts/${params.accountId}/conversations/${params.conversationId}/messages`;
+        
         const body = {
             content: params.message,
             private: params.private,
