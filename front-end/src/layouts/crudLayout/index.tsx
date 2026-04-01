@@ -1,6 +1,8 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { useCrudContext } from "@/contexts/crud-context/crud-provider"
-import type { PropsWithChildren } from "react"
+import { selectByCrudCreateIsSuccess } from "@/store/crud/selectors"
+import { useEffect, type PropsWithChildren } from "react"
+import { useSelector } from "react-redux"
 
 export interface CrudLayoutProps extends PropsWithChildren {
     title: string,
@@ -17,13 +19,21 @@ export const CrudLayout: React.FC<CrudLayoutProps> = ({
     deleteModalContent
 }) => {
     const { state, actions } = useCrudContext();
+    const isCreateSuccess = useSelector(selectByCrudCreateIsSuccess);
+
+    useEffect(() => {
+        if (isCreateSuccess) {
+            actions.panel.close("isCreatePanelOpen")
+        }
+    }, [isCreateSuccess])
+
 
     return (
         <div>
             {children}
-            {createModalContent ?? <CrudModal isOpen={state.isCreatePanelOpen} onClose={() => actions.panel.close("isCreatePanelOpen")} title={title}>{createModalContent}</CrudModal>}
-            {updateModalContent ?? <CrudModal isOpen={state.isUpdatePanelOpen} onClose={() => actions.panel.close("isUpdatePanelOpen")} title={title}>{updateModalContent}</CrudModal>}
-            {deleteModalContent ?? <CrudModal isOpen={state.isDeleteModalOpen} onClose={() => actions.panel.close("isDeleteModalOpen")} title={title}>{deleteModalContent}</CrudModal>}
+            {createModalContent ? <CrudModal isOpen={state.isCreatePanelOpen} onClose={() => actions.panel.close("isCreatePanelOpen")} title={title}>{createModalContent}</CrudModal> : null}
+            {updateModalContent ? <CrudModal isOpen={state.isUpdatePanelOpen} onClose={() => actions.panel.close("isUpdatePanelOpen")} title={title}>{updateModalContent}</CrudModal> : null}
+            {deleteModalContent ? <CrudModal isOpen={state.isDeleteModalOpen} onClose={() => actions.panel.close("isDeleteModalOpen")} title={title}>{deleteModalContent}</CrudModal> : null}
         </div>
     )
 }
@@ -55,8 +65,9 @@ export const CrudModal: React.FC<CrudModalProps> = ({
                     </DialogTitle>
                 </DialogHeader>
                 <DialogDescription>
-                    {children}
+
                 </DialogDescription>
+                {children}
             </DialogContent>
         </Dialog>
     )

@@ -1,6 +1,11 @@
 
 
-export interface ICrudModuleStates<T = object> {
+interface AnyRecord {
+    id: string | number,
+    [key: string | number]: any
+}
+
+export interface ICrudModuleStates<T = AnyRecord> {
     currentItem: T | null,
     resultItem: T | null,
     isLoading: boolean,
@@ -8,7 +13,7 @@ export interface ICrudModuleStates<T = object> {
     error: string | null
 }
 
-export interface ISearchModuleStates<T = object> {
+export interface ISearchModuleStates<T = AnyRecord> {
     items: T[],
     isLoading: boolean,
     isSuccess: boolean | null,
@@ -20,7 +25,7 @@ export interface ISearchModuleStates<T = object> {
     }
 }
 
-export interface ICrudStates<T = object> {
+export interface ICrudStates<T = AnyRecord> {
     create: ICrudModuleStates<T>,
     read: ICrudModuleStates<T>,
     update: ICrudModuleStates<T>,
@@ -35,6 +40,7 @@ export enum ICrudTypes {
     SET_LOADING = "CRUD/SET_LOADING",
     SET_FINISH_LOADING = "CRUD/SET_FINISH_LOADING",
     RESET_ALL_ACTION_STATES = "CRUD/RESET_ALL_ACTION_STATES",
+    RESET_ONE_ACTION_STATE = "CRUD/RESET_ONE_ACTION_STATE",
     SET_SUCCESS_FETCH_ALL = "CRUD/SET_SUCCESS_FETCH_ALL",
     SET_FAIL_FETCH_ALL = "CRUD/SET_FAIL_FETCH_ALL",
     SET_SUCCESS_SEARCH = "CRUD/SET_SUCCESS_SEARCH",
@@ -89,13 +95,11 @@ export interface setFailFetchOne {
 
 export interface setSuccessCreate<T> {
     type: ICrudTypes.SET_SUCCESS_CREATE,
-    keyState: CrudKeyStates,
     payload: T
 }
 
 export interface setFailCreate {
     type: ICrudTypes.SET_FAIL_CREATE,
-    keyState: CrudKeyStates,
     payload: string
 }
 
@@ -111,20 +115,23 @@ export interface setFailUpdate {
     payload: string
 }
 
-export interface setSuccessDelete<T> {
+export interface setSuccessDelete {
     type: ICrudTypes.SET_SUCCESS_DELETE,
-    keyState: CrudKeyStates,
-    payload: T
+    payload: string | number
 }
 
 export interface setFailDelete {
     type: ICrudTypes.SET_FAIL_DELETE,
-    keyState: CrudKeyStates,
     payload: string
 }
 
 export interface resetAllActionStates {
     type: ICrudTypes.RESET_ALL_ACTION_STATES
+}
+
+export interface resetOneActionState {
+    type: ICrudTypes.RESET_ONE_ACTION_STATE
+    keyState: CrudKeyStates
 }
 
 
@@ -136,9 +143,10 @@ export type ICrudActions<T> =
     setFailCreate |
     setSuccessUpdate<T> |
     setFailUpdate |
-    setSuccessDelete<T> |
+    setSuccessDelete |
     setFailDelete |
     resetAllActionStates |
+    resetOneActionState |
     setLoading |
     setFinishLoading |
     setSuccessSearch<T> |

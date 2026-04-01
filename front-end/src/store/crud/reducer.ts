@@ -50,7 +50,27 @@ export const crudReducer: Reducer<ICrudStates<any>, ICrudActions<any>> = (state 
                     isLoading: false,
                 }
             }
-
+        case ICrudTypes.SET_SUCCESS_FETCH_ONE:
+            return {
+                ...state,
+                [action.keyState]: {
+                    ...state[action.keyState],
+                    isLoading: false,
+                    error: null,
+                    currentItem: action.payload,
+                }
+            }
+        case ICrudTypes.SET_FAIL_FETCH_ONE:
+            return {
+                ...state,
+                [action.keyState]: {
+                    ...state[action.keyState],
+                    isLoading: false,
+                    isSuccess: false,
+                    error: action.payload,
+                    currentItem: null,
+                }
+            }
         case ICrudTypes.SET_SUCCESS_SEARCH:
             return {
                 ...state,
@@ -64,7 +84,8 @@ export const crudReducer: Reducer<ICrudStates<any>, ICrudActions<any>> = (state 
                         currentPage: action.payload.currentPage,
                         totalPages: action.payload.totalPages,
                         limit: action.payload.limit
-                    }
+                    },
+                    error: null
                 }
             }
         case ICrudTypes.SET_FAIL_SEARCH:
@@ -75,6 +96,65 @@ export const crudReducer: Reducer<ICrudStates<any>, ICrudActions<any>> = (state 
                     isLoading: false,
                     isSuccess: false,
                     error: action.payload
+                }
+            }
+        case ICrudTypes.SET_SUCCESS_CREATE:
+
+            return {
+                ...state,
+                search: {
+                    ...state.search,
+                    items: [...state.search.items, action.payload as any]
+                },
+                create: {
+                    ...state.create,
+                    isLoading: false,
+                    isSuccess: true,
+                    error: null,
+                    resultItem: action.payload
+                }
+            }
+        case ICrudTypes.SET_FAIL_CREATE:
+            return {
+                ...state,
+                create: {
+                    ...state.create,
+                    isLoading: false,
+                    isSuccess: false,
+                    error: action.payload,
+                    resultItem: null
+                }
+            }
+        case ICrudTypes.SET_SUCCESS_DELETE:
+            const items = state.search.items.filter((item) => item.id !== action.payload)
+            return {
+                ...state,
+                search: {
+                    ...state.search,
+                    items: items
+                },
+                delete: {
+                    ...state.delete,
+                    isLoading: false,
+                    isSuccess: true,
+                    error: null,
+                }
+            }
+        case ICrudTypes.SET_FAIL_DELETE:
+            return {
+                ...state,
+                delete: {
+                    ...state.delete,
+                    isLoading: false,
+                    isSuccess: false,
+                    error: action.payload,
+                }
+            }
+        case ICrudTypes.RESET_ONE_ACTION_STATE:
+            return {
+                ...state,
+                [action.keyState]: {
+                    ...initialCrudState[action.keyState]
                 }
             }
         case ICrudTypes.RESET_ALL_ACTION_STATES:

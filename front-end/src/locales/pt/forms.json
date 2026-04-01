@@ -44,6 +44,19 @@
             "INVALID_CREDENTIALS_ERROR": "Senha inválida"
         }
     },
+    "credentials": {
+        "name": "Nome",
+        "accessToken": "Token de Acesso",
+        "refreshToken": "Token de Atualização",
+        "code": "Código",
+        "accountId": "Id da Conta",
+        "messages": {
+            "delete": "Esta ação excluirá permanentemente o registro de nome {{name}}. Deseja continuar?"
+        }
+    },
     "submit": "Enviar",
-    "save": "Salvar"
+    "save": "Salvar",
+    "clear": "Limpar",
+    "yes": "Sim",
+    "no": "Não"
 }

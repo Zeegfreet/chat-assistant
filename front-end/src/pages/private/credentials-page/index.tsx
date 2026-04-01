@@ -1,7 +1,11 @@
+import { CreateCredentialForm } from "@/forms/crud/credentials/createCredentialForm"
+import { DeleteCredentialForm } from "@/forms/crud/credentials/deleteCredentialForm"
 import { CrudModule } from "@/modules/crud"
 import { type CrudSearchModuleProps } from "@/modules/crud/search-module"
+import { useTranslation } from "react-i18next"
 
 export const CredentialsPage: React.FC = () => {
+    const { t } = useTranslation("common");
     const searchColumns: CrudSearchModuleProps["columns"] = [
         {
             accessorKey: "id",
@@ -27,7 +31,9 @@ export const CredentialsPage: React.FC = () => {
 
     return (
         <CrudModule
-            title="Credentials"
+            title={t("credentials.title")}
+            createForm={<CreateCredentialForm />}
+            deleteForm={<DeleteCredentialForm />}
             searchConfig={{
                 columns: searchColumns,
                 pathName: "credentials"

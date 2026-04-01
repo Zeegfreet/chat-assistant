@@ -21,7 +21,6 @@
             }
         }
     },
-    
     "signin": {
         "email": "E-mail",
         "password": "Password",
@@ -45,6 +44,19 @@
             "INVALID_CREDENTIALS_ERROR": "Password invalid."
         }
     },
+    "credentials": {
+        "name": "Name",
+        "accessToken": "Access Token",
+        "refreshToken": "Refresh Token",
+        "code": "Code",
+        "accountId": "Account Id",
+        "messages": {
+            "delete": "This action will permanently delete the record named {{name}}. Do you wish to continue?"
+        }
+    },
     "submit": "Submit",
-    "save": "Save"
+    "save": "Save",
+    "clear": "Clear",
+    "yes": "Yes",
+    "no": "No"
 }

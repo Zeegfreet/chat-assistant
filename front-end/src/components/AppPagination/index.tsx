@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Field, FieldDescription, FieldLabel } from "../ui/field"
 import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from "../ui/pagination"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
@@ -24,6 +24,13 @@ export const AppPagination: React.FC<AppPaginationProps> = (props) => {
         currentPage: props.currentPage,
         limit: props.limit
     })
+
+    useEffect(() => {
+        setPaginationModel(state => ({
+            ...state,
+            totalPages: props.totalPages
+        }))
+    }, [props.totalPages])
 
     const sendCallBack = (values: AppPaginationModel) => {
         if (props.onPaginationChange) {
@@ -78,18 +85,18 @@ export const AppPagination: React.FC<AppPaginationProps> = (props) => {
                 <PaginationContent >
                     <PaginationItem >
                         <PaginationPrevious
-                            href="#"
                             onClick={() => paginationModel.currentPage > 1 ? onPageChange(-1) : null}
                             isActive={paginationModel.currentPage > 1}
                             text={t("pagination.previous")}
+                            className="cursor-pointer"
                         />
                     </PaginationItem>
                     <PaginationItem value={1}>
                         <PaginationNext
-                            href="#"
                             onClick={() => paginationModel.currentPage < paginationModel.totalPages ? onPageChange(1) : null}
                             isActive={paginationModel.currentPage < paginationModel.totalPages}
                             text={t("pagination.next")}
+                            className="cursor-pointer"
                         />
                     </PaginationItem>
                 </PaginationContent>

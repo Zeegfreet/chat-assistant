@@ -114,6 +114,13 @@ const ActionsDropDown: React.FC<ActionsDropDownProps> = ({
     id,
     pathName
 }) => {
+    const dispatch = useAppDispatch();
+    const { actions } = useCrudContext();
+
+    const handleDelete = () => {
+        dispatch(crudActions.setCurrent(id, pathName, "delete"))
+        actions.panel.open("isDeleteModalOpen")
+    }
 
     return (
         <DropdownMenu>
@@ -123,7 +130,7 @@ const ActionsDropDown: React.FC<ActionsDropDownProps> = ({
             <DropdownMenuContent align="start">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleDelete}>
                         <TrashIcon />
                         Deletar
                     </DropdownMenuItem>

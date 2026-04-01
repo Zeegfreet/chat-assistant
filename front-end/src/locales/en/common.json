@@ -33,5 +33,8 @@
     "languages": {
         "pt": "Portuguese",
         "en": "English"
+    },
+    "credentials": {
+        "title": "Credentials"
     }
 }

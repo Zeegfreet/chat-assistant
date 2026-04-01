@@ -6,6 +6,9 @@ import qs from "qs"
 export const paths = {
     credentials: {
         search: "/v1/credentials",
+        create: "/v1/credentials",
+        delete: "/v1/credentials",
+        findById: "/v1/credentials"
     }
 }
 
@@ -41,13 +44,50 @@ export interface ISearchQuery {
 }
 
 export const httpServices = {
-    create: async <T = any>(path: string, payload: T): Promise<IServiceResponse<T>> => {
+    create: async <T = any>(pathName: IPathName, payload: T): Promise<IServiceResponse<T>> => {
         try {
             includeCredentials()
+            const path = paths[pathName]["create"]
             const response = await http.post(path, payload)
             return {
                 success: true,
                 data: response.data.resources,
+            }
+        } catch (error) {
+            return {
+                success: false,
+                data: null,
+                error: (error as Error).message
+            }
+        }
+    },
+    findById: async <T = any>(pathName: IPathName, id: string | number): Promise<IServiceResponse<T>> => {
+        try {
+            includeCredentials()
+            const path = paths[pathName]["findById"]
+            const url = path + "/" + String(id)
+            const response = await http.get(url)
+            return {
+                success: true,
+                data: response.data.resources
+            }
+        } catch (error) {
+            return {
+                success: false,
+                data: null,
+                error: (error as Error).message
+            }
+        }
+    },
+    delete: async <T = any>(pathName: IPathName, id: string | number): Promise<IServiceResponse<T>> => {
+        try {
+            includeCredentials()
+            const path = paths[pathName]["delete"]
+            const url = path + "/" + String(id)
+            await http.delete(url)
+            return {
+                success: true,
+                data: null
             }
         } catch (error) {
             return {
