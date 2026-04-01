@@ -1,5 +1,11 @@
 {
     "infos": {
         "upload image": "Selecione uma imagem"
+    },
+    "pagination": {
+        "next": "Próxima",
+        "previous": "Anterior",
+        "rows per page": "Linhas por página",
+        "page from pages": "página {{currentPage}} de {{totalPages}}."
     }
 }

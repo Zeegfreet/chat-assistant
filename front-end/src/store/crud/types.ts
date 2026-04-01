@@ -1,13 +1,35 @@
 
-export interface ICrudStates<T> {
-    items: T[]
-    page?: number
-    limit?: number
-    isLoading: boolean
-    isSuccess: boolean | null
+
+export interface ICrudModuleStates<T = object> {
+    currentItem: T | null,
+    resultItem: T | null,
+    isLoading: boolean,
+    isSuccess: boolean | null,
     error: string | null
-    selectedItem: T | null
 }
+
+export interface ISearchModuleStates<T = object> {
+    items: T[],
+    isLoading: boolean,
+    isSuccess: boolean | null,
+    error: string | null,
+    pagination: {
+        currentPage: number,
+        totalPages: number,
+        limit: number
+    }
+}
+
+export interface ICrudStates<T = object> {
+    create: ICrudModuleStates<T>,
+    read: ICrudModuleStates<T>,
+    update: ICrudModuleStates<T>,
+    delete: ICrudModuleStates<T>,
+    search: ISearchModuleStates<T>
+}
+
+
+export type CrudKeyStates = keyof ICrudStates
 
 export enum ICrudTypes {
     SET_LOADING = "CRUD/SET_LOADING",
@@ -27,12 +49,24 @@ export enum ICrudTypes {
     SET_FAIL_DELETE = "CRUD/SET_FAIL_DELETE",
 }
 
+
+export interface setLoading {
+    type: ICrudTypes.SET_LOADING,
+    keyState: CrudKeyStates
+}
+
+export interface setFinishLoading {
+    type: ICrudTypes.SET_FINISH_LOADING,
+    keyState: CrudKeyStates
+}
+
 export interface setSuccessSearch<T> {
     type: ICrudTypes.SET_SUCCESS_SEARCH,
     payload: {
-        items: T[]
-        page?: number
-        limit?: number
+        items: T[],
+        currentPage: number,
+        totalPages: number,
+        limit: number
     }
 }
 
@@ -41,53 +75,51 @@ export interface setFailSearch {
     payload: string
 }
 
-export interface setSuccessFetchAll<T> {
-    type: ICrudTypes.SET_SUCCESS_FETCH_ALL,
-    payload: T[]
-}
-
-export interface setFailFetchAll {
-    type: ICrudTypes.SET_FAIL_FETCH_ALL,
-    payload: string
-}
-
 export interface setSuccessFetchOne<T> {
     type: ICrudTypes.SET_SUCCESS_FETCH_ONE,
+    keyState: CrudKeyStates,
     payload: T
 }
 
 export interface setFailFetchOne {
     type: ICrudTypes.SET_FAIL_FETCH_ONE,
+    keyState: CrudKeyStates,
     payload: string
 }
 
 export interface setSuccessCreate<T> {
     type: ICrudTypes.SET_SUCCESS_CREATE,
+    keyState: CrudKeyStates,
     payload: T
 }
 
 export interface setFailCreate {
     type: ICrudTypes.SET_FAIL_CREATE,
+    keyState: CrudKeyStates,
     payload: string
 }
 
 export interface setSuccessUpdate<T> {
     type: ICrudTypes.SET_SUCCESS_UPDATE,
+    keyState: CrudKeyStates,
     payload: T
 }
 
 export interface setFailUpdate {
     type: ICrudTypes.SET_FAIL_UPDATE,
+    keyState: CrudKeyStates,
     payload: string
 }
 
 export interface setSuccessDelete<T> {
     type: ICrudTypes.SET_SUCCESS_DELETE,
+    keyState: CrudKeyStates,
     payload: T
 }
 
 export interface setFailDelete {
     type: ICrudTypes.SET_FAIL_DELETE,
+    keyState: CrudKeyStates,
     payload: string
 }
 
@@ -95,17 +127,9 @@ export interface resetActionStates {
     type: ICrudTypes.RESET_ACTION_STATES
 }
 
-export interface setLoading {
-    type: ICrudTypes.SET_LOADING
-}
 
-export interface setFinishLoading {
-    type: ICrudTypes.SET_FINISH_LOADING
-}
 
 export type ICrudActions<T> =
-    setSuccessFetchAll<T> |
-    setFailFetchAll |
     setSuccessFetchOne<T> |
     setFailFetchOne |
     setSuccessCreate<T> |

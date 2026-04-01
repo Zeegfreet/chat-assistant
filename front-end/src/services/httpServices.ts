@@ -1,5 +1,15 @@
 import { http } from "@/http/http"
 import includeCredentials from "./includeCredentials"
+import qs from "qs"
+
+
+export const paths = {
+    credentials: {
+        search: "/v1/credentials",
+    }
+}
+
+export type IPathName = keyof typeof paths
 
 export interface IServiceResponse<T> {
     success: boolean
@@ -17,13 +27,18 @@ export interface ISearchResponse<T> {
     error?: string | null
 }
 
-export const paths = {
-    credentials: {
-        search: "/v1/credentials/search",
+
+export interface ISearchQuery {
+    page?: number
+    limit?: number
+    search?: string
+    filter?: {
+        [key: string | number]: any
+    },
+    order?: {
+        [key: string | number]: "ASC" | "DESC"
     }
 }
-
-export type PathName = keyof typeof paths
 
 export const httpServices = {
     create: async <T = any>(path: string, payload: T): Promise<IServiceResponse<T>> => {
@@ -42,18 +57,19 @@ export const httpServices = {
             }
         }
     },
-    search: async <T = any>(pathName: PathName, query: T): Promise<ISearchResponse<T>> => {
+    search: async <T = any>(pathName: IPathName, query: ISearchQuery): Promise<ISearchResponse<T>> => {
         try {
             includeCredentials()
-            const queryParams = new URLSearchParams(query as Record<string, string>).toString()
+            const queryParams = qs.stringify(query)
             const path = paths[pathName]["search"]
-            const response = await http.get(path, { params: { q: queryParams } })
+            const url = path + "?" + queryParams
+            const response = await http.get(url, { params: { q: queryParams } })
             return {
                 success: true,
                 data: {
-                    totalPages: response.data.totalPages,
-                    currentPage: response.data.currentPage,
-                    data: response.data.resources
+                    totalPages: response.data.resources.totalPages,
+                    currentPage: response.data.resources.currentPage,
+                    data: response.data.resources.data
                 },
             }
         } catch (error) {
