@@ -6,7 +6,6 @@ COPY . .
 
 
 ENV VITE_SERVICES_URL=http://localhost/api
-ENV VITE_FILES_URL=http://localhost/files
 
 RUN npm install
 

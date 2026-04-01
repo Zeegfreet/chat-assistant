@@ -3,5 +3,8 @@ assistant-service/certs
 assistant-service/logs
 assistant-service/.env
 assistant-service/dist
+front-end/build
+front-end/.env
+front-end/node_modules
 dev
 .env
