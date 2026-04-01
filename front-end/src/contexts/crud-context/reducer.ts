@@ -3,16 +3,21 @@ import { ICrudContextTypes, type ICrudContextActions, type ICrudContextStates } 
 
 
 export const crudContextInitialState: ICrudContextStates = {
-    isModalOpen: false
+    isCreatePanelOpen: false,
+    isReadPanelOpen: false,
+    isUpdatePanelOpen: false,
+    isDeleteModalOpen: false,
+    isSearchPanelOpen: false,
+    isAdvancedSearchOpen: false,
 }
 
 
 export const crudContextReducer: Reducer<ICrudContextStates, ICrudContextActions> = (state, action) => {
     switch (action.type) {
-        case ICrudContextTypes.SET_MODAL_OPEN:
-            return { ...state, isModalOpen: true }
-        case ICrudContextTypes.SET_MODAL_CLOSED:
-            return { ...state, isModalOpen: false }
+        case ICrudContextTypes.SET_PANEL_OPEN:
+            return { ...crudContextInitialState, [action.keyState]: true }
+        case ICrudContextTypes.SET_PANEL_CLOSED:
+            return { ...crudContextInitialState, [action.keyState]: false }
         default:
             return { ...state }
     }

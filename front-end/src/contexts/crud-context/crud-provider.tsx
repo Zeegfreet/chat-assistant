@@ -8,7 +8,7 @@ export type ICrudContext = [state: ICrudContextStates, ActionDispatch<[action: I
 export const CrudContext = createContext({} as ICrudContext)
 
 
-export const CrudProvider: React.FC<PropsWithChildren> = ({
+export const CrudContextProvider: React.FC<PropsWithChildren> = ({
     children
 }) => {
     const [state, dispatch] = useReducer(crudContextReducer, crudContextInitialState)

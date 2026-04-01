@@ -1,4 +1,5 @@
-import { CrudSearchModule, type CrudSearchModuleProps } from "@/modules/crud/search-module"
+import { CrudModule } from "@/modules/crud"
+import { type CrudSearchModuleProps } from "@/modules/crud/search-module"
 
 export const CredentialsPage: React.FC = () => {
     const searchColumns: CrudSearchModuleProps["columns"] = [
@@ -25,11 +26,12 @@ export const CredentialsPage: React.FC = () => {
 
 
     return (
-        <>
-            <CrudSearchModule
-                columns={searchColumns}
-                pathName="credentials"
-            />
-        </>
+        <CrudModule
+            title="Credentials"
+            searchConfig={{
+                columns: searchColumns,
+                pathName: "credentials"
+            }}
+        />
     )
 }

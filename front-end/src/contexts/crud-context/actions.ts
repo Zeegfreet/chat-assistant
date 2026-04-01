@@ -1,17 +1,19 @@
 import type { Dispatch } from "react"
-import { ICrudContextTypes, type ICrudContextActions } from "./types"
+import { ICrudContextTypes, type ICrudContextActions, type ICrudContextKeyState } from "./types"
 
 
 export const crudContextActions = (dispatch: Dispatch<ICrudContextActions>) => ({
-    modal: {
-        open: () => {
+    panel: {
+        open: (keyState: ICrudContextKeyState) => {
             dispatch({
-                type: ICrudContextTypes.SET_MODAL_OPEN
+                type: ICrudContextTypes.SET_PANEL_OPEN,
+                keyState
             })
         },
-        close: () => {
+        close: (keyState: ICrudContextKeyState) => {
             dispatch({
-                type: ICrudContextTypes.SET_MODAL_CLOSED
+                type: ICrudContextTypes.SET_PANEL_CLOSED,
+                keyState
             })
         }
     }

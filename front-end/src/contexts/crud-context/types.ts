@@ -1,24 +1,32 @@
 
 
 export interface ICrudContextStates {
-    isModalOpen: boolean
+    isCreatePanelOpen: boolean,
+    isReadPanelOpen: boolean,
+    isUpdatePanelOpen: boolean,
+    isDeleteModalOpen: boolean,
+    isSearchPanelOpen: boolean,
+    isAdvancedSearchOpen: boolean,
 }
+
+export type ICrudContextKeyState = keyof ICrudContextStates
 
 export enum ICrudContextTypes {
-    SET_MODAL_OPEN = "CONTEXT/CRUD/SET_MODAL_OPEN",
-    SET_MODAL_CLOSED = "CONTEXT/CRUD/SET_MODAL_CLOSED",
+    SET_PANEL_OPEN = "CRUD/CONTEXT/SET_PANEL_OPEN",
+    SET_PANEL_CLOSED = "CRUD/CONTEXT/SET_PANEL_CLOSED"
 }
 
 
-export interface setCrudContextModalOpen {
-    type: ICrudContextTypes.SET_MODAL_OPEN
+export interface setPanelOpen {
+    type: ICrudContextTypes.SET_PANEL_OPEN,
+    keyState: ICrudContextKeyState
 }
 
-export interface setCrudModalClosed {
-    type: ICrudContextTypes.SET_MODAL_CLOSED
+export interface setPanelClosed {
+    type: ICrudContextTypes.SET_PANEL_CLOSED,
+    keyState: ICrudContextKeyState
 }
-
 
 export type ICrudContextActions = |
-    setCrudContextModalOpen |
-    setCrudModalClosed
+    setPanelOpen |
+    setPanelClosed

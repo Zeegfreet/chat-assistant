@@ -77,7 +77,7 @@ export const crudReducer: Reducer<ICrudStates<any>, ICrudActions<any>> = (state 
                     error: action.payload
                 }
             }
-        case ICrudTypes.RESET_ACTION_STATES:
+        case ICrudTypes.RESET_ALL_ACTION_STATES:
             return {
                 ...initialState
             }

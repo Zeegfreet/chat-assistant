@@ -32,5 +32,10 @@ export const crudActions = ({
                 payload: response.error || "An error occurred while searching."
             })
         },
-
+    reset: <T>() =>
+        (dispatch: Dispatch<ICrudActions<T>>) => {
+            dispatch({
+                type: ICrudTypes.RESET_ALL_ACTION_STATES
+            })
+        }
 })

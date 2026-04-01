@@ -34,7 +34,7 @@ export type CrudKeyStates = keyof ICrudStates
 export enum ICrudTypes {
     SET_LOADING = "CRUD/SET_LOADING",
     SET_FINISH_LOADING = "CRUD/SET_FINISH_LOADING",
-    RESET_ACTION_STATES = "CRUD/RESET_ACTION_STATES",
+    RESET_ALL_ACTION_STATES = "CRUD/RESET_ALL_ACTION_STATES",
     SET_SUCCESS_FETCH_ALL = "CRUD/SET_SUCCESS_FETCH_ALL",
     SET_FAIL_FETCH_ALL = "CRUD/SET_FAIL_FETCH_ALL",
     SET_SUCCESS_SEARCH = "CRUD/SET_SUCCESS_SEARCH",
@@ -123,8 +123,8 @@ export interface setFailDelete {
     payload: string
 }
 
-export interface resetActionStates {
-    type: ICrudTypes.RESET_ACTION_STATES
+export interface resetAllActionStates {
+    type: ICrudTypes.RESET_ALL_ACTION_STATES
 }
 
 
@@ -138,7 +138,7 @@ export type ICrudActions<T> =
     setFailUpdate |
     setSuccessDelete<T> |
     setFailDelete |
-    resetActionStates |
+    resetAllActionStates |
     setLoading |
     setFinishLoading |
     setSuccessSearch<T> |
