@@ -10,20 +10,21 @@ export const CredentialsPage: React.FC = () => {
     const searchColumns: CrudSearchModuleProps["columns"] = [
         {
             accessorKey: "id",
-            header: "Código",
+            header: t("id"),
+            cell: ({ getValue }) => `#${getValue()}`
         },
         {
             accessorKey: "name",
-            header: "Nome",
+            header: t("credentials.name"),
         },
         {
             accessorKey: "createdAt",
-            header: "Criado Em",
+            header: t("createdAt"),
             cell: ({ getValue }) => new Date(getValue()).toLocaleString()
         },
         {
             accessorKey: "updatedAt",
-            header: "Atualizado Em",
+            header: t("updatedAt"),
             cell: ({ getValue }) => new Date(getValue()).toLocaleString()
 
         }

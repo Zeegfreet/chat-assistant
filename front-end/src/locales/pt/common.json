@@ -1,6 +1,9 @@
 {
     "language": "Idioma",
     "theme": "Tema",
+    "id": "ID",
+    "createdAt": "Criado Em",
+    "updatedAt": "Atualizado Em",
     "themes": {
         "dark": "Mudar para tema escuro",
         "light": "Mudar para tema claro"
@@ -35,6 +38,12 @@
         "en": "Inglês"
     },
     "credentials": {
-        "title": "Credenciais"
+        "title": "Credenciais",
+        "name": "Nome",
+        "accessToken": "Token de Acesso",
+        "refreshToken": "Token de Atualização",
+        "code": "Código",
+        "accountId": "ID da Conta"
+        
     }
 }

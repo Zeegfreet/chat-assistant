@@ -1,6 +1,9 @@
 {
     "language": "Language",
     "theme": "Theme",
+    "id": "ID",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
     "profile": {
         "profile": "Profile",
         "change email": "Change email",
@@ -35,6 +38,12 @@
         "en": "English"
     },
     "credentials": {
-        "title": "Credentials"
+        "title": "Credentials",
+        "name": "Name",
+        "accessToken": "Access Token",
+        "refreshToken": "Refresh Token",
+        "code": "Code",
+        "accountId": "Account ID"
+        
     }
 }
