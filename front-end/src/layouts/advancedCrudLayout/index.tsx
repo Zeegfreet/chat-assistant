@@ -1,3 +1,4 @@
+import { Modal } from "@/components/Modal"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer"
 import { useCrudContext } from "@/contexts/crud-context/crud-provider"
@@ -32,8 +33,8 @@ export const AdvancedCrudLayout: React.FC<AdvancedCrudLayoutProps> = ({
     return (
         <div>
             {children}
-            {createModalContent ? <CrudDrawer isOpen={state.isCreatePanelOpen} onClose={() => actions.panel.close("isCreatePanelOpen")} title={title}>{createModalContent}</CrudDrawer> : null}
-            {updateModalContent ? <CrudDrawer isOpen={state.isUpdatePanelOpen} onClose={() => actions.panel.close("isUpdatePanelOpen")} title={title}>{updateModalContent}</CrudDrawer> : null}
+            {createModalContent ? <CrudAdvancedModal isOpen={state.isCreatePanelOpen} onClose={() => actions.panel.close("isCreatePanelOpen")} title={title}>{createModalContent}</CrudAdvancedModal> : null}
+            {updateModalContent ? <CrudAdvancedModal isOpen={state.isUpdatePanelOpen} onClose={() => actions.panel.close("isUpdatePanelOpen")} title={title}>{updateModalContent}</CrudAdvancedModal> : null}
             {deleteModalContent ? <CrudModal isOpen={state.isDeleteModalOpen} onClose={() => actions.panel.close("isDeleteModalOpen")} title={title}>{deleteModalContent}</CrudModal> : null}
         </div>
     )
@@ -89,15 +90,15 @@ export const CrudDrawer: React.FC<CrudDrawerProps> = ({
     const handleOpenChange = (open: boolean) => {
         if (!open) onClose()
     }
-    
+
     return (
-        <Drawer 
+        <Drawer
             direction="bottom"
             open={isOpen}
             onOpenChange={handleOpenChange}
-            
+
         >
-            <DrawerContent 
+            <DrawerContent
             >
                 <DrawerHeader>
                     <DrawerTitle>{title}</DrawerTitle>
@@ -105,5 +106,30 @@ export const CrudDrawer: React.FC<CrudDrawerProps> = ({
                 {children}
             </DrawerContent>
         </Drawer>
+    )
+}
+
+
+export interface CrudDrawerProps extends PropsWithChildren {
+    isOpen: boolean,
+    onClose: () => void,
+    title: string,
+}
+
+export const CrudAdvancedModal: React.FC<CrudDrawerProps> = ({
+    title,
+    isOpen,
+    onClose,
+    children
+}) => {
+
+    return (
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            title={title}
+        >
+            {children}
+        </Modal>
     )
 }
