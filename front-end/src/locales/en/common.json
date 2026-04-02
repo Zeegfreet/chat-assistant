@@ -45,5 +45,13 @@
         "code": "Code",
         "accountId": "Account ID"
         
+    },
+    "agents": {
+        "title": "Agents",
+        "name": "Name",
+        "slug": "Slug",
+        "model": "Model",
+        "provider": "Provider",
+        "active": "Active"
     }
 }

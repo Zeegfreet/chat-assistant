@@ -10,6 +10,13 @@ export const paths = {
         delete: "/v1/credentials",
         findById: "/v1/credentials",
         update: "/v1/credentials"
+    },
+    agents: {
+        search: "/v1/agents",
+        create: "/v1/agents",
+        delete: "/v1/agents",
+        findById: "/v1/agents",
+        update: "/v1/agents"
     }
 }
 

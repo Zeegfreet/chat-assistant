@@ -45,5 +45,13 @@
         "code": "Código",
         "accountId": "ID da Conta"
         
+    },
+    "agents": {
+        "title": "Agentes",
+        "name": "Nome",
+        "slug": "Slug",
+        "model": "Modelo",
+        "provider": "Provedor",
+        "active": "Ativo"
     }
 }

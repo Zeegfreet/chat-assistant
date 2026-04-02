@@ -1,62 +1,56 @@
 import { PageLoader } from "@/components/PageLoader"
-import { Button } from "@/components/ui/button"
-import { Field, FieldContent, FieldError, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { selectByCrudUpdateCurrentItem, selectByCrudUpdateIsLoading, selectByCrudUpdateIsSuccess } from "@/store/crud/selectors"
-import { zodResolver } from "@hookform/resolvers/zod"
-import React from "react"
-import { Controller, useForm } from "react-hook-form"
+import { selectByCrudCreateIsLoading, selectByCrudCreateIsSuccess } from "@/store/crud/selectors"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
 import { useSelector } from "react-redux"
-import { createCredentialSchema, type ICreateCredentialSchema } from "./schema"
-import { useTranslation } from "react-i18next"
-import useAppDispatch from "@/hooks/useAppDispatch"
-import { crudActions } from "@/store/crud/actions"
-import { toast } from "sonner"
+import { Field, FieldContent, FieldError, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import useAppDispatch from "@/hooks/useAppDispatch";
+import { crudActions } from "@/store/crud/actions";
+import { useEffect } from "react";
+import { toast } from "sonner";
+import { agentSchema, type IAgentSchema } from "./schema";
 
-export const UpdateCredentialForm: React.FC = () => {
+
+export const CreateCredentialForm: React.FC = () => {
     const { t } = useTranslation("forms")
-    const isSuccess = useSelector(selectByCrudUpdateIsSuccess);
-    const isLoading = useSelector(selectByCrudUpdateIsLoading);
-    const currentItem = useSelector(selectByCrudUpdateCurrentItem);
+    const isLoading = useSelector(selectByCrudCreateIsLoading);
+    const isSuccess = useSelector(selectByCrudCreateIsSuccess);
     const dispatch = useAppDispatch();
-
     const form = useForm({
-            resolver: zodResolver(createCredentialSchema),
-            mode: "onChange",
-            disabled: isLoading,
-                defaultValues: {
-                name: "",
-                accessToken: undefined,
-                refreshToken: undefined,
-                code: undefined,
-                accountId: undefined,
-            }
-        })
-
-    React.useEffect(() => { 
-        if(currentItem){
-            const values = Object.entries(currentItem).map(([key, value]) => {
-                if(value === null) return [key, undefined]
-                return [key, value]
-            })
-            const currentItemWithUndefined = Object.fromEntries(values)
-            form.reset(currentItemWithUndefined)
+        resolver: zodResolver(agentSchema),
+        mode: "onChange",
+        disabled: isLoading,
+        defaultValues: {
+            name: "",
+            slug: "",
+            model: "gemini-3.1-flash-lite-preview",
+            isActive: false,
+            provider: "gemini",
+            prompt: "",
+            // credentials: z.object({
+            //     id: z.number()
+            // }).optional(),
         }
-    }, [currentItem])
+    })
 
-    React.useEffect(() => {
-        if (isSuccess) {
-            toast.success("success update")
-        }
-    }, [isSuccess, isLoading])
-
-    const handleSubmit = (values: ICreateCredentialSchema) => {
-        if(!currentItem){
-            return toast.error("No item selected")
-        }
-        dispatch(crudActions.update(currentItem.id, values, "credentials"))
+    const handleSubmit = (values: IAgentSchema) => {
+        dispatch(crudActions.create(values, "credentials"))
     }
+
+    useEffect(() => {
+        if (isSuccess) {
+            form.reset()
+            toast.message("Successfull created")
+
+        }
+        return () => {
+            dispatch(crudActions.resetOneModule("create"))
+        }
+    }, [isSuccess])
 
     return (
         <PageLoader
@@ -87,12 +81,12 @@ export const UpdateCredentialForm: React.FC = () => {
                     )}
                 />
                 <Controller
-                    name="accessToken"
+                    name="slug"
                     control={form.control}
                     render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
                             <FieldLabel>
-                                {t("credentials.accessToken")}
+                                {t("credentials.slug")}
                             </FieldLabel>
                             <FieldContent>
                                 <Textarea
@@ -106,12 +100,12 @@ export const UpdateCredentialForm: React.FC = () => {
                     )}
                 />
                 <Controller
-                    name="refreshToken"
+                    name="model"
                     control={form.control}
                     render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
                             <FieldLabel>
-                                {t("credentials.refreshToken")}
+                                {t("credentials.model")}
                             </FieldLabel>
                             <FieldContent>
                                 <Textarea
@@ -166,7 +160,7 @@ export const UpdateCredentialForm: React.FC = () => {
                 />
                 <div className="flex gap-5 justify-evenly">
                     <Button type="submit" className="w-30">{t("save")}</Button>
-                    <Button onClick={() => form.reset(currentItem)} className="w-30">{t("clear")}</Button>
+                    <Button onClick={() => form.reset()} className="w-30">{t("clear")}</Button>
                 </div>
             </form>
         </PageLoader>
