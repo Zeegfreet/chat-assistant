@@ -35,7 +35,7 @@ export const dbConfig = ((): DataSourceOptions & SeederOptions => {
             username: process.env.DEV_DB_USER || "admin",
             password: process.env.DEV_DB_PASSWORD || "admin",
             database: process.env.DEV_DB_NAME || "dev",
-            synchronize: true,
+            // synchronize: true,
             entities: ["src/entitys/**/*.entity.ts"],
             migrations: ["src/infra/db/migrations/*.ts"],
             seeds: ["src/infra/db/seeds/**/*.ts"]
