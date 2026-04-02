@@ -62,7 +62,10 @@
         "credentials": "Credenciais",
         "signeds": "Assinantes",
         "url": "Url",
-        "Headers": "Cabeçalho"
+        "Headers": "Cabeçalho",
+        "messages": {
+            "delete": "Esta ação excluirá permanentemente o registro de nome {{name}}. Deseja continuar?"
+        }
     },
     "submit": "Enviar",
     "save": "Salvar",

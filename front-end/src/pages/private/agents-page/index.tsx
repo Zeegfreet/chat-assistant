@@ -1,4 +1,5 @@
 import { CreateAgentForm } from "@/forms/crud/agents/createAgentForm";
+import { DeleteAgentForm } from "@/forms/crud/agents/deleteAgentForm";
 import { UpdateAgentForm } from "@/forms/crud/agents/updateAgentForm";
 import { AdvancedCrudModule, type AdvancedCrudModuleProps } from "@/modules/advanced-crud"
 import { useTranslation } from "react-i18next"
@@ -62,7 +63,7 @@ export const AgentsPage: React.FC = () => {
         <AdvancedCrudModule
             title={t("credentials.title")}
             createForm={<CreateAgentForm />}
-            // deleteForm={<DeleteCredentialForm />}
+            deleteForm={<DeleteAgentForm />}
             updateForm={<UpdateAgentForm />}
             searchConfig={searchConfig}
 

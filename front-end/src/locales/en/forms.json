@@ -62,7 +62,10 @@
         "credentials": "Credentials",
         "signeds": "Signeds",
         "url": "Url",
-        "Headers": "Headers"
+        "Headers": "Headers",
+        "messages": {
+            "delete": "This action will permanently delete the record named {{name}}. Do you wish to continue?"
+        }
     },
     "submit": "Submit",
     "save": "Save",

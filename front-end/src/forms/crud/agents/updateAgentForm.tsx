@@ -31,6 +31,7 @@ export const UpdateAgentForm: React.FC = () => {
     const dispatch = useAppDispatch();
     const theme = useSelector(selectThemeByApp);
 
+
     const form = useForm({
         resolver: zodResolver(agentSchema),
         mode: "onChange",
@@ -46,6 +47,7 @@ export const UpdateAgentForm: React.FC = () => {
             signeds: []
         }
     });
+
 
     const { fields, append, remove } = useFieldArray({
         control: form.control,
@@ -70,6 +72,7 @@ export const UpdateAgentForm: React.FC = () => {
     }, [isSuccess, isLoading])
 
     const handleSubmit = (values: IAgentSchema) => {
+        console.log(currentItem)
         if (!currentItem) {
             return toast.error("No item selected")
         }
@@ -272,7 +275,7 @@ export const UpdateAgentForm: React.FC = () => {
                                 className="flex gap-5 items-center"
                                 key={field.id}
                             >
-                                <div className="flex-1">
+                                <div className="flex-1 gap-5">
                                     <Controller
                                         name={`signeds.${index}.url`}
                                         control={form.control}

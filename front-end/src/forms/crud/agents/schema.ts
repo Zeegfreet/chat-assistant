@@ -20,7 +20,7 @@ export const agentSchema = z.object({
     credentials: z.object({
         id: z.number()
     }).optional(),
-    signeds: z.array(z.union([signedSchema.strict(), signedId])).optional()
+    signeds: z.array(z.union([signedSchema, signedId])).optional()
 });
 
 export type IAgentSchema = z.infer<typeof agentSchema>
