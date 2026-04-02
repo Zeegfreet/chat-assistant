@@ -1,11 +1,10 @@
 import { useSelector } from "react-redux"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 import { Button } from "../ui/button"
-import { selectByLoggedUserEmail, selectByLoggedUserId, selectByLoggedUserName } from "@/store/session/selectors"
+import { selectByLoggedUserEmail, selectByLoggedUserName } from "@/store/session/selectors"
 import { abreviate } from "@/utils/abreviate"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { LogOutIcon, UserIcon } from "lucide-react"
-import { Skeleton } from "../ui/skeleton"
 import { stringToColor } from "@/utils/stringToColoer"
 import { Link, useNavigate } from "react-router"
 import { useTranslation } from "react-i18next"
@@ -13,7 +12,6 @@ import { useTranslation } from "react-i18next"
 export const UserMenu: React.FC = () => {
     const name = useSelector(selectByLoggedUserName);
     const email = useSelector(selectByLoggedUserEmail);
-    const userId = useSelector(selectByLoggedUserId);
     const initials = abreviate(name || "");
     const { t } = useTranslation();
     const navigate = useNavigate();

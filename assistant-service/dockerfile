@@ -44,6 +44,8 @@ RUN npm install --omit=dev
 ENV NODE_ENV=production
 ENV JWT_PRIVATE_KEY_PATH=certs/private.key.pem
 ENV JWT_PUBLIC_KEY_PATH=certs/public.key.pem
+ENV JWT_ISSUER=auth-service
+ENV JWT_KID=auth-service-kid
 
 
 EXPOSE 3000

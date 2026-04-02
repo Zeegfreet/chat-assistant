@@ -1,13 +1,27 @@
 FROM node:lts-slim as development
 
-WORKDIR /app
+WORKDIR /
 
 COPY . .
 
 
-ENV VITE_SERVICES_URL=http://localhost/api
+ENV VITE_SERVICES_URL=http://localhost:3000
+
+RUN npm install
+
+CMD ["npm", "run", "dev"]
+
+# Faz a build
+FROM node:lts-slim as builder
+
+WORKDIR /
+
+COPY package*.json ./
+COPY tsconfig.json ./
 
 RUN npm install
 
 
-CMD ["npm", "run", "dev"]
+COPY . .
+
+RUN npm run build

@@ -9,7 +9,7 @@ export interface AppLinkProps {
 }
 
 export const AppLink: React.FC<AppLinkProps> = ({
-    size,
+    // size,
     icon,
     name,
     link

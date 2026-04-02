@@ -1,0 +1,7 @@
+FROM alpine:latest
+
+COPY generate.sh .
+
+RUN chmod +x generate.sh
+
+CMD ["./generate.sh"]

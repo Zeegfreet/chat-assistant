@@ -1,0 +1,55 @@
+
+services:
+  gen-certs:
+    build:
+      context: ./cert-generate
+      dockerfile: dockerfile
+    container_name: gen-certs
+    volumes:
+      - certs:/certs
+    command: ["./generate.sh"]
+    environment:
+      - JWT_PRIVATE_KEY_PASSPHRASE=${JWT_PASSPHRASE}
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /certs/public.key.pem || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 1s
+
+  assistant-service:
+    build:
+      context: ./assistant-service
+      dockerfile: dockerfile
+      target: production
+    container_name: assistant-service
+    depends_on:
+      gen_certs:
+        condition: service_completed_successfully
+    restart: always
+    ports:
+      - "38000:3000"
+    networks:
+      - assistant-network
+    volumes:
+      - certs:/app/certs
+      - assistant-logs:/app/logs
+    environment:
+      - JWT_PRIVATE_KEY_PASSPHRASE=${JWT_PASSPHRASE}
+      - JWT_REFRESH_KEY_PASSPHRASE=${JWT_REFRESH_PASSPHRASE}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - REDIS_URI=redis://${REDIS_HOST}:${REDIS_PORT}/${REDIS_DB}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_DB=${REDIS_DB}
+  
+  front-end:
+    build:
+      context: ./front-end
+      dockerfile: dockerfile
+    volumes:
+      - ./www:/dist
