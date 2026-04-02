@@ -8,9 +8,10 @@ export class TypeOrmFindAiAgentByPkRepository implements FindAiAgentByPkReposito
             .getInstance()
             .getCollection(AiAgents);
     }
-    async findById(id: FindAiAgentByPkRepository.Id): Promise<FindAiAgentByPkRepository.Result> {
+    async findById(id: FindAiAgentByPkRepository.Id): Promise<FindAiAgentByPkRepository.Result | null> {
         const aiAgent = await this.repository.findOne({ where: { id }, relations: {
-            credentials: true
+            credentials: true,
+            signeds: true
         } });
         return aiAgent;
     }
