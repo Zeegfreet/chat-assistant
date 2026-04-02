@@ -8,7 +8,8 @@ export const paths = {
         search: "/v1/credentials",
         create: "/v1/credentials",
         delete: "/v1/credentials",
-        findById: "/v1/credentials"
+        findById: "/v1/credentials",
+        update: "/v1/credentials"
     }
 }
 
@@ -49,6 +50,25 @@ export const httpServices = {
             includeCredentials()
             const path = paths[pathName]["create"]
             const response = await http.post(path, payload)
+            return {
+                success: true,
+                data: response.data.resources,
+            }
+        } catch (error) {
+            return {
+                success: false,
+                data: null,
+                error: (error as Error).message
+            }
+        }
+    },
+    update: async <T = any>(pathName: IPathName, id: string | number, payload: T): Promise<IServiceResponse<T>> => {
+        try {
+            includeCredentials()
+            const path = paths[pathName]["update"]
+            const url = path + "/" + String(id)
+            console.log(url)
+            const response = await http.patch(url, payload)
             return {
                 success: true,
                 data: response.data.resources,

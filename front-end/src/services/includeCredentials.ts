@@ -22,9 +22,10 @@ const includeCredentials = () => {
                     return store.dispatch(sessionActions.signOut())
                 }
             }
+            
             if (error.response?.status === 401 && !originalRequest._retry) {
                 const errorData = error.response?.data instanceof Blob ? JSON.parse(await error.response.data.text()) : error.response?.data
-                if (errorData && errorData.error === "SESSION_EXPIRED") {
+                if (errorData && errorData.error === "SESSION_EXPIRED_ERROR") {
                     originalRequest._retry = true;
 
                     await store.dispatch(sessionActions.refresh());

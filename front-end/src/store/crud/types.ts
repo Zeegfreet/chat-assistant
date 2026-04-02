@@ -105,13 +105,11 @@ export interface setFailCreate {
 
 export interface setSuccessUpdate<T> {
     type: ICrudTypes.SET_SUCCESS_UPDATE,
-    keyState: CrudKeyStates,
     payload: T
 }
 
 export interface setFailUpdate {
     type: ICrudTypes.SET_FAIL_UPDATE,
-    keyState: CrudKeyStates,
     payload: string
 }
 

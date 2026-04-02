@@ -13,6 +13,7 @@ import { crudActions } from "@/store/crud/actions"
 import { selectByCrudSearchIsLoading, selectByCrudSearchItems, selectByCrudSearchPagination } from "@/store/crud/selectors"
 import { Edit, EllipsisVertical, PlusCircle, Search, TrashIcon } from "lucide-react"
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useSelector } from "react-redux"
 
 export interface CrudSearchModuleProps<T = any, K = any> {
@@ -43,7 +44,7 @@ export const CrudSearchModule: React.FC<CrudSearchModuleProps> = ({
     useEffect(() => {
         handleSearch({
             search,
-            page: pagination.currentPage,
+            page: 1,
             limit: pagination.limit
         })
     }, [search])
@@ -114,6 +115,7 @@ const ActionsDropDown: React.FC<ActionsDropDownProps> = ({
     id,
     pathName
 }) => {
+    const { t } = useTranslation("components");
     const dispatch = useAppDispatch();
     const { actions } = useCrudContext();
 
@@ -122,24 +124,29 @@ const ActionsDropDown: React.FC<ActionsDropDownProps> = ({
         actions.panel.open("isDeleteModalOpen")
     }
 
+    const handleUpdate = () => {
+        dispatch(crudActions.setCurrent(id, pathName, "update"))
+        actions.panel.open("isUpdatePanelOpen")
+    }
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="outline"><EllipsisVertical /></Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuLabel>{t("crud.actions")}</DropdownMenuLabel>
                 <DropdownMenuGroup>
                     <DropdownMenuItem onClick={handleDelete}>
                         <TrashIcon />
-                        Deletar
+                        {t("crud.delete")}
                     </DropdownMenuItem>
 
                 </DropdownMenuGroup>
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleUpdate}>
                         <Edit />
-                        Atualizar
+                        {t("crud.update")}
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>

@@ -70,6 +70,28 @@ export const crudActions = ({
                 payload: response.error || "An error occurred while creating."
             })
         },
+    update: <T>(id: string | number, payload: T, pathName: IPathName) =>
+        async (dispatch: Dispatch<ICrudActions<T>>) => {
+            dispatch({
+                type: ICrudTypes.SET_LOADING,
+                keyState: "update"
+            })
+
+            const response = await httpServices.update(pathName, id, payload)
+
+
+            if (response.success && response.data) {
+                return dispatch({
+                    type: ICrudTypes.SET_SUCCESS_UPDATE,
+                    payload: response.data
+                })
+            }
+
+            return dispatch({
+                type: ICrudTypes.SET_FAIL_UPDATE,
+                payload: response.error || "An error occurred while updating."
+            })
+        },
     search: <T>(query: ISearchQuery, pathName: IPathName) =>
         async (dispatch: Dispatch<ICrudActions<T>>) => {
             dispatch({
@@ -100,6 +122,7 @@ export const crudActions = ({
         },
     resetOneModule: (keyState: CrudKeyStates) =>
         (dispatch: Dispatch<ICrudActions<any>>) => {
+            console.log("resetOneModule", keyState)
             dispatch({
                 type: ICrudTypes.RESET_ONE_ACTION_STATE,
                 keyState
@@ -107,7 +130,7 @@ export const crudActions = ({
         },
     reset: <T>() =>
         (dispatch: Dispatch<ICrudActions<T>>) => {
-            dispatch({
+            return dispatch({
                 type: ICrudTypes.RESET_ALL_ACTION_STATES
             })
         }

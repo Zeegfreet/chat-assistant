@@ -7,5 +7,13 @@
         "previous": "Anterior",
         "rows per page": "Linhas por página",
         "page from pages": "página {{currentPage}} de {{totalPages}}."
+    },
+    "crud": {
+        "search": "Pesquisar",
+        "create": "Criar",
+        "update": "Atualizar",
+        "delete": "Excluir",
+        "actions": "Ações",
+        "no data": "Nenhum dado encontrado."
     }
 }

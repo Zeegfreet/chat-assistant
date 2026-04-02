@@ -150,6 +150,33 @@ export const crudReducer: Reducer<ICrudStates<any>, ICrudActions<any>> = (state 
                     error: action.payload,
                 }
             }
+        case ICrudTypes.SET_SUCCESS_UPDATE:
+            const updatedItems = state.search.items.map((item) => item.id === action.payload.id ? action.payload : item)
+            return {
+                ...state,
+                search: {
+                    ...state.search,
+                    items: updatedItems
+                },
+                update: {
+                    ...state.update,
+                    isLoading: false,
+                    isSuccess: true,
+                    error: null,
+                    resultItem: action.payload
+                }
+            }
+        case ICrudTypes.SET_FAIL_UPDATE:
+            return {
+                ...state,
+                update: {
+                    ...state.update,
+                    isLoading: false,
+                    isSuccess: false,
+                    error: action.payload,
+                    resultItem: null
+                }
+            }
         case ICrudTypes.RESET_ONE_ACTION_STATE:
             return {
                 ...state,

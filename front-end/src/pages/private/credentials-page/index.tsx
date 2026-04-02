@@ -1,5 +1,6 @@
 import { CreateCredentialForm } from "@/forms/crud/credentials/createCredentialForm"
 import { DeleteCredentialForm } from "@/forms/crud/credentials/deleteCredentialForm"
+import { UpdateCredentialForm } from "@/forms/crud/credentials/updateCredentialForm"
 import { CrudModule } from "@/modules/crud"
 import { type CrudSearchModuleProps } from "@/modules/crud/search-module"
 import { useTranslation } from "react-i18next"
@@ -34,6 +35,7 @@ export const CredentialsPage: React.FC = () => {
             title={t("credentials.title")}
             createForm={<CreateCredentialForm />}
             deleteForm={<DeleteCredentialForm />}
+            updateForm={<UpdateCredentialForm />}
             searchConfig={{
                 columns: searchColumns,
                 pathName: "credentials"
