@@ -24,7 +24,7 @@ services:
       target: production
     container_name: assistant-service
     depends_on:
-      gen_certs:
+      gen-certs:
         condition: service_completed_successfully
     restart: always
     ports:
@@ -53,3 +53,9 @@ services:
       dockerfile: dockerfile
     volumes:
       - ./www:/dist
+  networks:
+    assistant-network:
+
+  volumes:
+    certs:
+    assistant-logs:
