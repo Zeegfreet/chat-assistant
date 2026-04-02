@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { CreateAgentForm } from "@/forms/crud/agents/createAgentForm";
 import { DeleteAgentForm } from "@/forms/crud/agents/deleteAgentForm";
 import { UpdateAgentForm } from "@/forms/crud/agents/updateAgentForm";
@@ -33,9 +34,13 @@ export const AgentsPage: React.FC = () => {
                 header: t("agents.name"),
             },
             {
+                accessorKey: "slug",
+                header: t("agents.slug"),
+            },
+            {
                 accessorKey: "isActive",
                 header: t("agents.active"),
-                cell: ({ getValue }) => getValue() ? "Yes" : "No"
+                cell: ({ getValue }) => getValue() ? <Badge className="bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300">{t("yes")}</Badge> : <Badge variant="destructive">{t("no")}</Badge>
             },
             {
                 accessorKey: "model",
@@ -61,7 +66,7 @@ export const AgentsPage: React.FC = () => {
 
     return (
         <AdvancedCrudModule
-            title={t("credentials.title")}
+            title={t("agents.title")}
             createForm={<CreateAgentForm />}
             deleteForm={<DeleteAgentForm />}
             updateForm={<UpdateAgentForm />}

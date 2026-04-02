@@ -4,6 +4,8 @@
     "id": "ID",
     "createdAt": "Created At",
     "updatedAt": "Updated At",
+    "yes": "Yes",
+    "no": "No",
     "profile": {
         "profile": "Profile",
         "change email": "Change email",
@@ -44,7 +46,6 @@
         "refreshToken": "Refresh Token",
         "code": "Code",
         "accountId": "Account ID"
-        
     },
     "agents": {
         "title": "Agents",

@@ -44,7 +44,7 @@ export class UpdateAiAgentController implements Controller {
             dto.signeds = [...raw.signeds];
         }
 
-        if(raw.isActive){
+        if(raw.isActive !== undefined){
             dto.isActive = raw.isActive;
         }
 

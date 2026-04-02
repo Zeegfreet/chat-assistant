@@ -4,6 +4,8 @@
     "id": "ID",
     "createdAt": "Criado Em",
     "updatedAt": "Atualizado Em",
+    "yes": "Sim",
+    "no": "Não",
     "themes": {
         "dark": "Mudar para tema escuro",
         "light": "Mudar para tema claro"
@@ -44,7 +46,6 @@
         "refreshToken": "Token de Atualização",
         "code": "Código",
         "accountId": "ID da Conta"
-        
     },
     "agents": {
         "title": "Agentes",
