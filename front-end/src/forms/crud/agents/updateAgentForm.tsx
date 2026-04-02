@@ -1,5 +1,4 @@
 import { PageLoader } from "@/components/PageLoader"
-import { selectByCrudCreateIsLoading, selectByCrudCreateIsSuccess } from "@/store/crud/selectors"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { useSelector } from "react-redux"
@@ -21,12 +20,14 @@ import { TypographyH1 } from "@/components/Typography";
 import CodeMirror from "@uiw/react-codemirror";
 import { json } from "@codemirror/lang-json";
 import { selectThemeByApp } from "@/store/app/selectors";
+import { selectByCrudUpdateCurrentItem, selectByCrudUpdateIsLoading, selectByCrudUpdateIsSuccess } from "@/store/crud/selectors";
 
 
-export const CreateAgentForm: React.FC = () => {
+export const UpdateAgentForm: React.FC = () => {
     const { t } = useTranslation("forms")
-    const isLoading = useSelector(selectByCrudCreateIsLoading);
-    const isSuccess = useSelector(selectByCrudCreateIsSuccess);
+    const isSuccess = useSelector(selectByCrudUpdateIsSuccess);
+    const isLoading = useSelector(selectByCrudUpdateIsLoading);
+    const currentItem = useSelector(selectByCrudUpdateCurrentItem);
     const dispatch = useAppDispatch();
     const theme = useSelector(selectThemeByApp);
 
@@ -51,20 +52,29 @@ export const CreateAgentForm: React.FC = () => {
         name: "signeds"
     })
 
-    const handleSubmit = (values: IAgentSchema) => {
-        dispatch(crudActions.create(values, "agents"))
-    }
+    useEffect(() => {
+        if (currentItem) {
+            const values = Object.entries(currentItem).map(([key, value]) => {
+                if (value === null) return [key, undefined]
+                return [key, value]
+            })
+            const currentItemWithUndefined = Object.fromEntries(values)
+            form.reset(currentItemWithUndefined)
+        }
+    }, [currentItem])
 
     useEffect(() => {
         if (isSuccess) {
-            form.reset()
-            toast.message("Successfull created")
+            toast.success("success update")
+        }
+    }, [isSuccess, isLoading])
 
+    const handleSubmit = (values: IAgentSchema) => {
+        if (!currentItem) {
+            return toast.error("No item selected")
         }
-        return () => {
-            dispatch(crudActions.resetOneModule("create"))
-        }
-    }, [isSuccess])
+        dispatch(crudActions.update(currentItem.id, values, "agents"))
+    }
 
     return (
         <PageLoader

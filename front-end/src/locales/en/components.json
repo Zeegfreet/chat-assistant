@@ -1,6 +1,12 @@
 {
     "infos": {
-        "upload image": "Upload an image"
+        "upload image": "Upload an image",
+        "empty": "No results to this search."
+    },
+    "search": {
+        "content": "Search...",
+        "select": "Select....",
+        "clear": "Clear Selection"
     },
     "pagination": {
         "next": "Next",

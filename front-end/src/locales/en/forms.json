@@ -54,9 +54,21 @@
             "delete": "This action will permanently delete the record named {{name}}. Do you wish to continue?"
         }
     },
+    "agents": {
+        "model": "Model",
+        "provider": "Provider",
+        "slug": "Slug",
+        "prompt": "Prompt",
+        "credentials": "Credentials",
+        "signeds": "Signeds",
+        "url": "Url",
+        "Headers": "Headers"
+    },
     "submit": "Submit",
     "save": "Save",
     "clear": "Clear",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "name": "Name",
+    "active": "Is Active"
 }

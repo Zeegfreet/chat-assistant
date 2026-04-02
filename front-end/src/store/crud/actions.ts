@@ -122,7 +122,6 @@ export const crudActions = ({
         },
     resetOneModule: (keyState: CrudKeyStates) =>
         (dispatch: Dispatch<ICrudActions<any>>) => {
-            console.log("resetOneModule", keyState)
             dispatch({
                 type: ICrudTypes.RESET_ONE_ACTION_STATE,
                 keyState

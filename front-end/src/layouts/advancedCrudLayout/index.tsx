@@ -1,6 +1,6 @@
 import { Modal } from "@/components/Modal"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer"
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "@/components/ui/drawer"
 import { useCrudContext } from "@/contexts/crud-context/crud-provider"
 import { selectByCrudCreateIsSuccess } from "@/store/crud/selectors"
 import { useEffect, type PropsWithChildren } from "react"
@@ -33,8 +33,8 @@ export const AdvancedCrudLayout: React.FC<AdvancedCrudLayoutProps> = ({
     return (
         <div>
             {children}
-            {createModalContent ? <CrudAdvancedModal isOpen={state.isCreatePanelOpen} onClose={() => actions.panel.close("isCreatePanelOpen")} title={title}>{createModalContent}</CrudAdvancedModal> : null}
-            {updateModalContent ? <CrudAdvancedModal isOpen={state.isUpdatePanelOpen} onClose={() => actions.panel.close("isUpdatePanelOpen")} title={title}>{updateModalContent}</CrudAdvancedModal> : null}
+            {createModalContent ? <CrudDrawer isOpen={state.isCreatePanelOpen} onClose={() => actions.panel.close("isCreatePanelOpen")} title={title}>{createModalContent}</CrudDrawer> : null}
+            {updateModalContent ? <CrudDrawer isOpen={state.isUpdatePanelOpen} onClose={() => actions.panel.close("isUpdatePanelOpen")} title={title}>{updateModalContent}</CrudDrawer> : null}
             {deleteModalContent ? <CrudModal isOpen={state.isDeleteModalOpen} onClose={() => actions.panel.close("isDeleteModalOpen")} title={title}>{deleteModalContent}</CrudModal> : null}
         </div>
     )
@@ -103,6 +103,7 @@ export const CrudDrawer: React.FC<CrudDrawerProps> = ({
                 <DrawerHeader>
                     <DrawerTitle>{title}</DrawerTitle>
                 </DrawerHeader>
+                <DrawerDescription></DrawerDescription>
                 {children}
             </DrawerContent>
         </Drawer>

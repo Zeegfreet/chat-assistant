@@ -25,7 +25,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title, 
                 )}
 
             >
-                <div className="flex w-full">
+                <div className="relative flex w-full box-border max-h-full">
                     <div className="grow p-2">
                         <TypographyH1 className=" font-semibold">{title}</TypographyH1>
                     </div>

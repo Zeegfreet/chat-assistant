@@ -54,9 +54,21 @@
             "delete": "Esta ação excluirá permanentemente o registro de nome {{name}}. Deseja continuar?"
         }
     },
+    "agents": {
+        "model": "Modelo",
+        "provider": "Provedor",
+        "slug": "Slug",
+        "prompt": "Prompt",
+        "credentials": "Credenciais",
+        "signeds": "Assinantes",
+        "url": "Url",
+        "Headers": "Cabeçalho"
+    },
     "submit": "Enviar",
     "save": "Salvar",
     "clear": "Limpar",
     "yes": "Sim",
-    "no": "Não"
+    "no": "Não",
+    "name": "Nome",
+    "active": "Ativo"
 }
