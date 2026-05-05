@@ -5,7 +5,7 @@ import path from "node:path";
 import swaggerUi from "swagger-ui-express";
 
 export const setupSwagger = async (app: Express) => {
-    if (process.env.NODE_ENV != "development") return;
+    // if (process.env.NODE_ENV != "development" && !process.env.NODE_ENV) return;
     console.log(chalk.yellowBright("[SWAGGER]"), "Instanced up in development mode...");
     const swaggerPath = path.resolve(__dirname, "openapi.yaml");
 
@@ -16,11 +16,12 @@ export const setupSwagger = async (app: Express) => {
         swaggerUi.serve,
         swaggerUi.setup(swaggerDocument, {
             swaggerOptions: {
-                withCredentials: true,
-                requestInterceptor: (req: any) => {
-                    req.credentials = "include";
-                    return req;
-                },
+                // withCredentials: true,
+                // requestInterceptor: (req: any) => {
+                //     req.credentials = "include";
+                //     return req;
+                // },
+                persistAuthorization: true
             }
         })
     );

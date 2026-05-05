@@ -1,0 +1,22 @@
+get:
+  tags:
+    - Profile
+  summary: Pegar Perfil do Usuário
+  description: |
+    Exibe os dados do perfil do usuário logado no momento.
+  responses:
+    "200":
+      description: "Success"
+      content:
+        applicatoin/json:
+          schema: 
+            allOf:
+              - $ref: "../schemas/success-base-response.yaml#"
+              - type: object
+                properties:
+                  resources:
+                    $ref: "../schemas/user-profile.yaml"
+    "400":
+      $ref: "../schemas/common-errors.yaml#/components/responses/SessionExpiredError"
+    "500":
+      $ref: "../schemas/common-errors.yaml#/components/responses/UnknownError"

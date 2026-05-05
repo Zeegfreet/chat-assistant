@@ -1,16 +1,16 @@
 openapi: 3.0.0
 
 info:
-  title: Hermes Auth Service
+  title: Assistant Service
   version: 1.0.0
-  description: Esta é uma api de autenticação de usuários, utilizada para criação, atualização, exclusão e busca de usuários, seus perfis de acessos e também suas permissões.  
+  description: Api voltada a gerenciar o serviço de Chat gerenciado por IA 
 
 servers:
   - url: http://localhost:3000
     description: Local Host
 
 security:
-  - cookieAuth: []
+  - bearerAuth: []
 
 paths:
 
@@ -18,6 +18,10 @@ paths:
     $ref: "./paths/auth-signup.yaml"
   /pub/signin:
     $ref: "./paths/auth-signin.yaml"
+
+  /v1/profile:
+    $ref: "./paths/profile.yaml"
+
   /v1/user:
     $ref: "./paths/user.yaml"
   /v1/user/{id}:
@@ -36,9 +40,10 @@ paths:
 components:
 
   securitySchemes:
-      cookieAuth:
-        type: apiKey
-        in: cookie
+      bearerAuth:
+        type: http
+        in: header
+        scheme: bearer 
         name: Authorization
         description: Deve conter accessToken no formato bearer que será enviado nas requisições privadas ao servidor para autenticação do usuário.
 
@@ -50,6 +55,8 @@ components:
       $ref: "./schemas/signin.yaml"
     User:
       $ref: "./schemas/user.yaml"
+    Profile:
+      $ref: "./schemas/user-profile.yaml"
     Role:
       $ref: "./schemas/role.yaml"
     Permission:
