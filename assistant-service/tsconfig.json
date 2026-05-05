@@ -7,23 +7,22 @@
     "noImplicitAny": true,
     "allowJs": true,
     "esModuleInterop": true,
-    "baseUrl": ".",
     "types": [
       "node",
       "jest"
     ],
     "paths": {
       "@data/*": [
-        "src/data/*"
+        "./src/data/*"
       ],
       "@app/*": [
-        "src/app/*"
+        "./src/app/*"
       ],
       "@domain/*": [
-        "src/domain/*"
+        "./src/domain/*"
       ],
       "@db/*": [
-        "src/infra/*"
+        "./src/infra/*"
       ],
       "@presentation/*": [
         "./src/presentation/*"
@@ -36,6 +35,7 @@
     "experimentalDecorators": true,
   },
   "include": [
-    "src/**/*"
-, "src/domain/useCases/auth/.ts"  ]
+    "src/**/*",
+    "src/domain/useCases/auth/.ts"
+  ]
 }

@@ -1,7 +1,7 @@
 import { BaseEntity } from "./BaseEntity";
 
 export class CredentialsModel extends BaseEntity{
-    name: string;
+    name!: string;
     accessToken?: string;
     refreshToken?: string;
     code?: string;

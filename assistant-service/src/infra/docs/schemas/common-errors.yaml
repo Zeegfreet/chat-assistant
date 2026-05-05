@@ -1,5 +1,19 @@
 components:
   responses:
+    AlreadyExistsError:
+      description: "Conflict"
+      content:
+        application/json:
+          schema:
+            allOf: 
+              - $ref: "./error-base-response.yaml#"
+          examples:
+            sessionExpiredError:
+              summary: "Already Exists"
+              value:
+                success: false
+                error: "ALREADY_EXISTS_ERROR"
+                message: "Already exists a credential with the received name."
     SessionExpiredError:
       description: "Unauthorized"
       content:
@@ -14,6 +28,19 @@ components:
                 success: false
                 error: "SESSION_EXPIRED_ERROR"
                 message: "The received credentials is expired, re-create u`r session."
+    ValidationError:
+      description: "Validation Error"
+      content:
+        application/json:
+          schema:
+              $ref: "../schemas/error-base-response.yaml"
+          examples:
+              validationError:
+                summary: Validation Error
+                value:
+                  success: false
+                  error: VALIDATION_ERROR
+                  message: "name: name is inválid"
     UnknownError:
       description: "Unknown"
       content:

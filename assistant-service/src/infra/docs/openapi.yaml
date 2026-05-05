@@ -21,20 +21,23 @@ paths:
 
   /v1/profile:
     $ref: "./paths/profile.yaml"
+  
+  /v1/credentials:
+    $ref: "./paths/credentials.yaml"
 
-  /v1/user:
+  /admin/user:
     $ref: "./paths/user.yaml"
-  /v1/user/{id}:
+  /admin/user/{id}:
     $ref: "./paths/user-id.yaml"
   
-  /v1/permission:
+  /admin/permission:
     $ref: "./paths/permission.yaml"
-  /v1/permission/{id}:
+  /admin/permission/{id}:
     $ref: "./paths/permission-id.yaml"
   
-  /v1/role:
+  /admin/role:
     $ref: "./paths/role.yaml"
-  /v1/role/{id}:
+  /admin/role/{id}:
     $ref: "./paths/role-id.yaml"
 
 components:
@@ -53,10 +56,17 @@ components:
       $ref: "./schemas/signup.yaml"
     SignIn:
       $ref: "./schemas/signin.yaml"
-    User:
-      $ref: "./schemas/user.yaml"
     Profile:
       $ref: "./schemas/user-profile.yaml"
+
+    CredentialsRequest:
+      $ref: "./schemas/credentials-request.yaml"
+
+    CredentialsResponse:
+      $ref: "./schemas/credentials-response.yaml"
+
+    User:
+      $ref: "./schemas/user.yaml"
     Role:
       $ref: "./schemas/role.yaml"
     Permission:
