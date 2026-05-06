@@ -24,6 +24,8 @@ paths:
   
   /v1/credentials:
     $ref: "./paths/credentials.yaml"
+  /v1/credentials/{id}:
+    $ref: "./paths/credentials-id.yaml"
 
   /admin/user:
     $ref: "./paths/user.yaml"

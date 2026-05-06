@@ -17,6 +17,6 @@ get:
                   resources:
                     $ref: "../schemas/user-profile.yaml"
     "401":
-      $ref: "../schemas/common-errors.yaml#/components/responses/SessionExpiredError"
+      $ref: "../schemas/common-errors.yaml#/components/responses/UnauthorizedError"
     "500":
       $ref: "../schemas/common-errors.yaml#/components/responses/UnknownError"

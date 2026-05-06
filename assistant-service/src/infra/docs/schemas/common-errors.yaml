@@ -8,13 +8,13 @@ components:
             allOf: 
               - $ref: "./error-base-response.yaml#"
           examples:
-            sessionExpiredError:
+            alreadyExistsError:
               summary: "Already Exists"
               value:
                 success: false
                 error: "ALREADY_EXISTS_ERROR"
                 message: "Already exists a credential with the received name."
-    SessionExpiredError:
+    UnauthorizedError:
       description: "Unauthorized"
       content:
         application/json:
@@ -28,6 +28,12 @@ components:
                 success: false
                 error: "SESSION_EXPIRED_ERROR"
                 message: "The received credentials is expired, re-create u`r session."
+            accessDeniedError:
+              summary: "Access Denied"
+              value:
+                success: false
+                error: "ACCESS_DENIED_ERROR"
+                message: "Access denied"
     ValidationError:
       description: "Bad Request"
       content:
@@ -41,6 +47,32 @@ components:
                   success: false
                   error: VALIDATION_ERROR
                   message: "name: name is inválid"
+    ValidationIdParamError:
+      description: "Bad Request"
+      content:
+        application/json:
+          schema:
+              $ref: "../schemas/error-base-response.yaml"
+          examples:
+              validationError:
+                summary: Validation Error
+                value:
+                  success: false
+                  error: VALIDATION_ERROR
+                  message: "id: id is not a number"
+    NotFoundError:
+      description: "Not Found"
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error-base-response.yaml"
+        examples:
+          notFoundError:
+            summary: Not Found Error
+            value:
+              success: false
+              error: "NOT_FOUND_ERROR"
+              message: "register not found with received id"
     UnknownError:
       description: "Unknown"
       content:
