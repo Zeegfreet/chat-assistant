@@ -1,0 +1,15 @@
+type: object
+allOf:
+  - $ref: "./success-base-response.yaml"
+  - type: object
+    properties:
+      resources:
+        allOf:
+          - $ref: "./base-entity.yaml"
+          - $ref: "./signup-request.yaml"
+          - properties:
+              roles:
+                type: array
+                items:
+                  type: string
+                  example: "Vendor"

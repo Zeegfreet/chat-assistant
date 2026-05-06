@@ -54,8 +54,8 @@ components:
 
   schemas:
 
-    SignUp:
-      $ref: "./schemas/signup.yaml"
+    SignUpRequest:
+      $ref: "./schemas/signup-request.yaml"
     SignIn:
       $ref: "./schemas/signin.yaml"
     Profile:

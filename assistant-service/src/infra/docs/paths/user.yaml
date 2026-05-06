@@ -8,7 +8,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: "../schemas/signup.yaml"
+          $ref: "../schemas/signup-request.yaml"
   responses:
     "201":
       description: Cadastro realizado com sucesso
