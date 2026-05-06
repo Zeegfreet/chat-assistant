@@ -1,0 +1,49 @@
+components:
+  schemas:
+    FilterValue:
+      description: "Valor do filtro: pode ser um valor direto ou um objeto com operadores."
+      oneOf:
+        - $ref: "#/components/schemas/PrimitiveValue"
+        - $ref: "#/components/schemas/FilterOperators"
+
+    PrimitiveValue:
+      oneOf:
+        - type: string
+          example: "ativo"
+        - type: number
+          example: 100
+        - type: boolean
+          example: true
+        - type: string
+          format: date-time
+          example: "2024-01-01T00:00:00Z"
+
+    FilterOperators:
+      type: object
+      description: "Operadores lógicos para filtragem avançada."
+      additionalProperties: false 
+      properties:
+        $gt:
+          type: string
+          description: "Maior que"
+        $gte:
+          type: string
+          description: "Maior ou igual a"
+        $lt:
+          type: string
+          description: "Menor que"
+        $lte:
+          type: string
+          description: "Menor ou igual a"
+        $between:
+          type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            type: string
+          description: "Array com dois valores para intervalo"
+        $in:
+          type: array
+          items:
+            type: string
+          description: "Lista de valores permitidos"
